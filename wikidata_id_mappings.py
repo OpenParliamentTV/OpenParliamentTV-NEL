@@ -1,0 +1,8 @@
+
+INSTANCE_OF = "wdt:P31"
+HUMAN = "wd:Q5"
+POSITION_HELD = "p:P39"
+MEMBER_OF_PARLIAMENT =  {
+    'DE': 'wd:Q1939555',
+    'DE-BY': 'wd:Q17586301'
+}
