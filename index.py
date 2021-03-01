@@ -1,8 +1,8 @@
 
 import wikidata_client;
-from wikidata_query_contructor import get_query_string;
+from wikidata_query_contructor import get_members_of_parliament;
 
-query = get_query_string(needle="merkel")
+query = get_members_of_parliament_by_name(name="merkel", parliament="DE")
 
 results = wikidata_client.get(query)
 print(results)
