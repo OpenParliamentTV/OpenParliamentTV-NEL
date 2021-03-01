@@ -1,6 +1,8 @@
 
 INSTANCE_OF = "wdt:P31"
 HUMAN = "wd:Q5"
+DATE_OF_BIRTH = "wdt:P569"
+DATE_OF_DEATH = "wdt:P570"
 POSITION_HELD = "p:P39"
 MEMBER_OF_PARLIAMENT =  {
     'DE': 'wd:Q1939555',
