@@ -2,7 +2,7 @@
 import wikidata_client;
 from wikidata_query_constructor import get_members_of_parliament;
 
-query = get_members_of_parliament(name="merkel", parliament="DE", date="1948-03-01")
+query = get_members_of_parliament(name="merkel", parliament="DE", date="1948-01-01")
 
 results = wikidata_client.get(query)
 print(results)
