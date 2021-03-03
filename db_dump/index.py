@@ -1,5 +1,5 @@
-import wikidata.wikidata_client
-from wikidata.wikidata_query_constructor import get_all_members_of_parliament
+import wikidata.client as wikidata_client
+from wikidata.queries import get_all_members_of_parliament
 
 
 query = get_all_members_of_parliament
