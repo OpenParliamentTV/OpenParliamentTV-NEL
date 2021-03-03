@@ -2,6 +2,18 @@
 from wikidata_id_mappings import INSTANCE_OF, HUMAN, DATE_OF_BIRTH, DATE_OF_DEATH, POSITION_HELD, MEMBER_OF_PARLIAMENT
 from wikidata_helpers import convert_to_property_statement as cps
 
+
+def get_all_members_of_parliament():    
+    query_string = """SELECT DISTINCT ?mdb WHERE {{
+        ?mdb {instance_of} {human}.
+        ?mdb {position_held} ?humansWithPositionHeld.
+        ?humansWithPositionHeld {position_held_ps} {member_parliament_de}.
+        ?mdb rdfs:label ?mdbString.
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],de". }
+        }"""
+    return query_string
+
+
 def get_members_of_parliament(name="", parliament='DE', date=None):
     query_string_1 = """SELECT DISTINCT ?mdb WHERE {{
         ?mdb {instance_of} {human}.

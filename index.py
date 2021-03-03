@@ -1,6 +1,6 @@
 
-import wikidata_client;
-from wikidata_query_constructor import get_members_of_parliament;
+import wikidata.client as wikidata_client;
+from wikidata.queries import get_members_of_parliament;
 
 query = get_members_of_parliament(name="merkel", parliament="DE", date="1948-01-01")
 
