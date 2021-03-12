@@ -9,7 +9,14 @@ MAPPINGS = {
     'ABGEORDNETENWATCH_ID': "wdt:P5355",
     'POSITION_HELD': "p:P39",
     'MEMBER_OF_PARLIAMENT':  {
-        'DE': 'wd:Q1939555',
-        'DE-BY': 'wd:Q17586301'
-    }
+        'DE': "wd:Q1939555",
+        'DE-BY': "wd:Q17586301"
+    },
+    'NATIVE_LABEL': "wdt:P1705",
+    'IMAGE': "wdt:P18",
+    'MEMBER_OF_POLITICAL_PARTY': "wdt:P102',
+    'SHORT_NAME': "wdt:P1813",
+    'SEX_OR_GENDER': "wdt:P21",
+    'OFFICIAL_WEBSITE': "wdt:P856",
+    'INSTAGRAM_USERNAME': "wdt:P2003"
 }

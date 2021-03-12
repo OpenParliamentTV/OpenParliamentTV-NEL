@@ -2,17 +2,22 @@ from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
 from wikidata.helpers import convert_to_property_statement as cps
 
 def get_all_members_of_parliament(parliament='DE'):    
-    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?familyName ?givenName ?dateOfBirth ?dateOfDeath ?degree ?abgeordnetenwatchID WHERE {{
+    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?familyName ?givenName ?dateOfBirth ?dateOfDeath ?degree ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI WHERE ?insta {{
         ?mdb {INSTANCE_OF} {HUMAN}.
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
         ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
         ?mdb rdfs:label ?mdbString.
-        ?mdb {FAMILY_NAME} ?familyName.
-        ?mdb {GIVEN_NAME} ?givenName.
-        ?mdb {DATE_OF_BIRTH} ?dateOfBirth.
+        OPTIONAL {{?mdb {FAMILY_NAME}/{NATIVE_LABEL} ?familyName. }}
+        OPTIONAL {{?mdb {GIVEN_NAME}/{NATIVE_LABEL} ?givenName. }}
+        OPTIONAL {{?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
         OPTIONAL {{?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{?mdb {ACADEMIC_DEGREE} ?degree. }}
         OPTIONAL {{?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
+        OPTIONAL {{?mdb {IMAGE} ?thumbnailURI. }}
+        OPTIONAL {{?mdb {MEMBER_OF_POLITICAL_PARTY}/{SHORT_NAME} ?party. }}
+        OPTIONAL {{?mdb {SEX_OR_GENDER} ?gender. }}
+        OPTIONAL {{?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
+        OPTIONAL {{?mdb {INSTAGRAM_USERNAME} ?insta. }}
         SERVICE wikibase:label {{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],de". }}
         }}
         """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament])
@@ -26,8 +31,8 @@ def get_members_of_parliament(name="", parliament='DE', date=None):
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
         ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
         ?mdb rdfs:label ?mdbString.
-        ?mdb {FAMILY_NAME} ?familyName.
-        ?mdb {GIVEN_NAME} ?givenName.
+        ?mdb {FAMILY_NAME}/{NATIVE_LABEL} ?familyName.
+        ?mdb {GIVEN_NAME}/{NATIVE_LABEL} ?givenName.
         ?mdb {DATE_OF_BIRTH} ?dateOfBirth.
         OPTIONAL {{ ?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{ ?mdb {ACADEMIC_DEGREE} ?degree. }}
