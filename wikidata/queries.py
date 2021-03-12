@@ -2,7 +2,7 @@ from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
 from wikidata.helpers import convert_to_property_statement as cps
 
 def get_all_members_of_parliament(parliament='DE'):    
-    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?familyName ?givenName ?dateOfBirth ?dateOfDeath ?degree ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI WHERE ?insta {{
+    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?familyName ?givenName ?dateOfBirth ?dateOfDeath ?degree ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?insta WHERE {{
         ?mdb {INSTANCE_OF} {HUMAN}.
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
         ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
