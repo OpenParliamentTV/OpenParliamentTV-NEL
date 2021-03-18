@@ -1,6 +1,12 @@
 from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
 from wikidata.helpers import convert_to_property_statement as cps
 
+# This query will most probably time out  :-/
+# Workaround is to filter the members by date of birth
+# Batch query
+# Add this filter statement before the SERVICE line:
+# FILTER("1920-01-01"^^xsd:dateTime <= ?dateOfBirth && ?dateOfBirth < "1930-01-01"^^xsd:dateTime).
+
 def get_all_members_of_parliament(parliament='DE'):    
     query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?familyName ?givenName ?dateOfBirth ?dateOfDeath ?degree ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?insta WHERE {{
         ?mdb {INSTANCE_OF} {HUMAN}.
@@ -23,6 +29,8 @@ def get_all_members_of_parliament(parliament='DE'):
         """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament])
     print(query_string)
     return query_string
+
+
 
 
 def get_members_of_parliament(name="", parliament='DE', date=None):
