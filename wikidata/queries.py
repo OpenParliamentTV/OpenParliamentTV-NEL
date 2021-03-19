@@ -1,13 +1,10 @@
 from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
 from wikidata.helpers import convert_to_property_statement as cps
 
-# This query will most probably time out  :-/
-# Workaround is to filter the members by date of birth
-# Batch query
-# Add this filter statement before the SERVICE line:
-# FILTER("1920-01-01"^^xsd:dateTime <= ?dateOfBirth && ?dateOfBirth < "1930-01-01"^^xsd:dateTime).
+# The query for all members of parliament will most probably time out  :-/
+# Workaround is to filter the members by date of birth, and get the results in multiple batches
 
-def get_all_members_of_parliament(parliament='DE'):    
+def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_birth='2030-01-01'):    
     query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?familyName ?givenName ?dateOfBirth ?dateOfDeath ?degree ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?insta WHERE {{
         ?mdb {INSTANCE_OF} {HUMAN}.
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
@@ -24,9 +21,10 @@ def get_all_members_of_parliament(parliament='DE'):
         OPTIONAL {{?mdb {SEX_OR_GENDER} ?gender. }}
         OPTIONAL {{?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
         OPTIONAL {{?mdb {INSTAGRAM_USERNAME} ?insta. }}
+        FILTER('{min_birth}'^^xsd:dateTime <= ?dateOfBirth && ?dateOfBirth < '{max_birth}'^^xsd:dateTime).
         SERVICE wikibase:label {{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],de". }}
         }}
-        """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament])
+        """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament], min_birth = min_birth, max_birth = max_birth)
     print(query_string)
     return query_string
 
