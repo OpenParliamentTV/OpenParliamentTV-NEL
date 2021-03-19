@@ -13,7 +13,7 @@ except:
 
 with open(INFILE) as infile:
     data = json.load(infile)
-    unique = { each['mdb'] : each for each in data }.values()
+    unique = { each['mdb']['value'] : each for each in data }.values()
     print(len(unique))
     with open(OUTFILE, 'w') as outfile:
         json.dump([u for u in unique], outfile)
