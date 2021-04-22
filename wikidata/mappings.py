@@ -18,5 +18,7 @@ MAPPINGS = {
     'SHORT_NAME': "wdt:P1813",
     'SEX_OR_GENDER': "wdt:P21",
     'OFFICIAL_WEBSITE': "wdt:P856",
-    'INSTAGRAM_USERNAME': "wdt:P2003"
+    'INSTAGRAM_USERNAME': "wdt:P2003",
+    'GENDER_MALE': "wd:Q6581097",
+    'GENDER_FEMALE': "wd:Q6581072"
 }
