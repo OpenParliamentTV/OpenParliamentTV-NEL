@@ -4,7 +4,8 @@ from wikidata.queries import get_all_members_of_parliament
 
 batches = [
     {'max_birth': '1900-01-01'},
-    {'min_birth': '1900-01-01', 'max_birth': '1920-01-01'},
+    {'min_birth': '1900-01-01', 'max_birth': '1910-01-01'},
+    {'min_birth': '1910-01-01', 'max_birth': '1920-01-01'},
     {'min_birth': '1920-01-01', 'max_birth': '1930-01-01'},
     {'min_birth': '1930-01-01', 'max_birth': '1940-01-01'},
     {'min_birth': '1940-01-01', 'max_birth': '1950-01-01'},

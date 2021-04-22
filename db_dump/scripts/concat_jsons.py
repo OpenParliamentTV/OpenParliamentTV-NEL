@@ -12,7 +12,7 @@ except:
 
 files = [os.path.join(FOLDER, f) for f in os.listdir(FOLDER)]
 
-with open(OUTFILE, 'a') as writer:
+with open(OUTFILE, 'w') as writer:
     writer.write('[')
     for i, f in enumerate(files):
         with open(f) as reader:
