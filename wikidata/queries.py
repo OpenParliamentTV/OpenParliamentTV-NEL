@@ -14,7 +14,8 @@ def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_b
         OPTIONAL {{?mdb {GIVEN_NAME}/{NATIVE_LABEL} ?givenName. }}
         OPTIONAL {{?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
         OPTIONAL {{?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
-        OPTIONAL {{?mdb {ACADEMIC_DEGREE} ?degree. }}
+        OPTIONAL {{?mdb {ACADEMIC_DEGREE} ?degreeEntity. }}
+        OPTIONAL {{?mdb {ACADEMIC_DEGREE}/{SHORT_NAME} ?degree. FILTER(LANG(?degree) = "en")}}
         OPTIONAL {{?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
         OPTIONAL {{?mdb {IMAGE} ?thumbnailURI. }}
         OPTIONAL {{?mdb {MEMBER_OF_POLITICAL_PARTY}/{SHORT_NAME} ?party. }}
