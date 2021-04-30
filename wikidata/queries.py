@@ -5,7 +5,7 @@ from wikidata.helpers import convert_to_property_statement as cps
 # Workaround is to filter the members by date of birth, and get the results in multiple batches
 
 def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_birth='2030-01-01'):    
-    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?insta WHERE {{
+    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WHERE {{
         ?mdb {INSTANCE_OF} {HUMAN}.
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
         ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
@@ -29,7 +29,9 @@ def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_b
         }}
         BIND(IF(BOUND(?genderLabel_ ), ?genderLabel_, "unknown") AS ?gender).
         OPTIONAL {{?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
-        OPTIONAL {{?mdb {INSTAGRAM_USERNAME} ?insta. }}
+        OPTIONAL {{?mdb {INSTAGRAM_USERNAME} ?instagram. }}
+        OPTIONAL {{?mdb {FACEBOOK_USERNAME} ?facebook. }}
+        OPTIONAL {{?mdb {TWITTER_USERNAME} ?twitter. }}
         FILTER('{min_birth}'^^xsd:dateTime <= ?dateOfBirth && ?dateOfBirth < '{max_birth}'^^xsd:dateTime).
         SERVICE wikibase:label {{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],de". }}
         }}
