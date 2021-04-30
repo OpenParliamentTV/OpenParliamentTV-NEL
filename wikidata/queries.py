@@ -15,13 +15,18 @@ def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_b
         OPTIONAL {{?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
         OPTIONAL {{?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
-        OPTIONAL {{?mdb {IMAGE} ?image_. }}
-        BIND(REPLACE(wikibase:decodeUri(STR(?image_)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") AS ?imageFileName_).
-        BIND(REPLACE(?imageFileName_, " ", "_") as ?imageFileNameSafe_).
-        BIND(MD5(?imageFileNameSafe_) as ?imageFileNameHash_).
-        BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1, 1), "/", SUBSTR(?imageFileNameHash_, 1, 2), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) as ?thumbnailURI)
+        OPTIONAL {{
+            ?mdb wdt:P18 ?image_.
+            BIND(REPLACE(wikibase:decodeUri(STR(?image_)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") AS ?imageFileName_)
+            BIND(REPLACE(?imageFileName_, " ", "_") AS ?imageFileNameSafe_)
+            BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
+            BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
+        }}
         OPTIONAL {{?mdb {MEMBER_OF_POLITICAL_PARTY} ?party. }}
-        OPTIONAL {{?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. FILTER(lang(?genderLabel_) = "en"). }}
+        OPTIONAL {{
+            ?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
+            FILTER(lang(?genderLabel_) = "en"). 
+        }}
         BIND(IF(BOUND(?genderLabel_ ), ?genderLabel_, "unknown") AS ?gender).
         OPTIONAL {{?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
         OPTIONAL {{?mdb {INSTAGRAM_USERNAME} ?insta. }}
