@@ -15,7 +15,7 @@ def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_b
         OPTIONAL {{?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
         OPTIONAL {{?mdb {IMAGE} ?thumbnailURI. }}
-        OPTIONAL {{?mdb {MEMBER_OF_POLITICAL_PARTY}/{SHORT_NAME} ?party. }}
+        OPTIONAL {{?mdb {MEMBER_OF_POLITICAL_PARTY} ?party. }}
         OPTIONAL {{?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. FILTER(lang(?genderLabel_) = "en"). }}
         BIND(IF(BOUND(?genderLabel_ ), ?genderLabel_, "unknown") AS ?gender).
         OPTIONAL {{?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
