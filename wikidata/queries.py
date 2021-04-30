@@ -1,14 +1,17 @@
 from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
 from wikidata.helpers import convert_to_property_statement as cps
+from wikidata.helpers import convert_to_qualifier_statement as cpq
+
 
 # The query for all members of parliament will most probably time out  :-/
 # Workaround is to filter the members by date of birth, and get the results in multiple batches
 
 def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_birth='2030-01-01'):    
-    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WHERE {{
+    query_string = """SELECT DISTINCT ?mdb ?mdbLabel ?faction ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WHERE {{
         ?mdb {INSTANCE_OF} {HUMAN}.
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
         ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
+        OPTIONAL {{ ?humansWithPositionHeld {parliamentary_group_pq} ?faction. }}
         ?mdb rdfs:label ?mdbString.
         ?mdb schema:description ?abstract.
         FILTER(lang(?abstract) = "de").
@@ -35,7 +38,7 @@ def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_b
         FILTER('{min_birth}'^^xsd:dateTime <= ?dateOfBirth && ?dateOfBirth < '{max_birth}'^^xsd:dateTime).
         SERVICE wikibase:label {{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],de". }}
         }}
-        """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament], min_birth = min_birth, max_birth = max_birth)
+        """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['PARLIAMENTARY_GROUP']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament], min_birth = min_birth, max_birth = max_birth)
     print(query_string)
     return query_string
 
