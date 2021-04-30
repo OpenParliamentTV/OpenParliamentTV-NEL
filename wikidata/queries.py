@@ -16,8 +16,8 @@ def get_all_members_of_parliament(parliament='DE', min_birth='1800-01-01', max_b
         OPTIONAL {{?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
         OPTIONAL {{?mdb {IMAGE} ?thumbnailURI. }}
         OPTIONAL {{?mdb {MEMBER_OF_POLITICAL_PARTY}/{SHORT_NAME} ?party. }}
-        OPTIONAL {{?mdb {SEX_OR_GENDER} ?genderEntity. }}
-        BIND(IF(?genderEntity = {GENDER_MALE}, "male", "female") AS ?gender).
+        OPTIONAL {{?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. FILTER(lang(?genderLabel_) = "en"). }}
+        BIND(IF(BOUND(?genderLabel_ ), ?genderLabel_, "unknown") AS ?gender).
         OPTIONAL {{?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
         OPTIONAL {{?mdb {INSTAGRAM_USERNAME} ?insta. }}
         FILTER('{min_birth}'^^xsd:dateTime <= ?dateOfBirth && ?dateOfBirth < '{max_birth}'^^xsd:dateTime).
