@@ -34,9 +34,7 @@ def reformat(obj):
         'additionalInformation': group_additionalInformation(flat),
         **flat
     }
-    print(new)
     return new
-    #return 
 
 
 INFILE = 'db_dump/data/mdbs/mdbs.json'
@@ -50,5 +48,3 @@ with open(INFILE) as infile:
         print(json.dumps(e, indent=4, sort_keys=True))
     with open(OUTFILE, 'w') as outfile:
         json.dump(entries, outfile)
-
-# Save the file
