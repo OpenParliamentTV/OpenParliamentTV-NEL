@@ -1,15 +1,5 @@
 import json
 
-DICT = {
-    'mdbLabel': 'xxxlabel'
-}
-
-def rename(prop):
-    try:
-        return DICT[prop]
-    except:
-        return prop
-
 def group_socials(obj):
     twitter = obj.pop('twitter', None)
     facebook = obj.pop('facebook', None)
