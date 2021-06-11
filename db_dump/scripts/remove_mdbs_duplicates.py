@@ -43,6 +43,10 @@ def group_records_by_ids(data):
         groups.append(entries)
     return groups
 
+def get_id(mdb):
+    key = int(mdb['id'][1:]) #remove the Q from the ID
+    return key
+
 with open(INFILE) as infile:
     data = json.load(infile)
     cleaned = []
@@ -50,6 +54,7 @@ with open(INFILE) as infile:
     for g in groups:
         merged = merge_dicts_additively(g)
         cleaned.append(merged)
+    cleaned.sort(key=get_id, reverse=True)
     with open(OUTFILE, 'w') as outfile:
         json.dump(cleaned, outfile)
 
