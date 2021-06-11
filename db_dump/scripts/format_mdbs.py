@@ -1,4 +1,7 @@
 import json
+INFILE = 'db_dump/data/mdbs/mdbs-rawqueryresults.json'
+OUTFILE = 'db_dump/data/mdbs/mdbs-formatted.json'
+
 
 def group_socials(obj):
     twitter = obj.pop('twitter', None)
@@ -36,9 +39,6 @@ def reformat(obj):
     }
     return new
 
-
-INFILE = 'db_dump/data/mdbs/mdbs.json'
-OUTFILE = 'db_dump/data/mdbs/mdbs-formatted.json'
 
 # map over the entries and reformat each of them (reformatting means changing property names or grouping properties)
 with open(INFILE) as infile:

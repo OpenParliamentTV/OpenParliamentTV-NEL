@@ -2,7 +2,7 @@ import json
 import ast
 
 INFILE = './db_dump/data/mdbs/mdbs-formatted.json'
-OUTFILE = './db_dump/data/mdbs/mdbs-formatted-nodups.json'
+OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
 
 def remove_dups_from_list(list):
     if all(type(el) is dict for el in list):
