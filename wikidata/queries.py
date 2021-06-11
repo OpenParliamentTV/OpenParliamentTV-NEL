@@ -50,7 +50,8 @@ def get_all_members_of_parliament(parliament='DE'):
             BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
             BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
         }}
-        OPTIONAL {{ ?mdb {MEMBER_OF_POLITICAL_PARTY} ?party. }}
+        OPTIONAL {{ ?mdb {MEMBER_OF_POLITICAL_PARTY} ?party. OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
+        FILTER('1949-01-01'^^xsd:dateTime <= ?partyEndDate_ || !BOUND(?partyEndDate_)).
         OPTIONAL {{
             ?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
             FILTER(lang(?genderLabel_) = "en"). 
