@@ -15,6 +15,7 @@ MAPPINGS = {
     'NATIVE_LABEL': "wdt:P1705",
     'IMAGE': "wdt:P18",
     'MEMBER_OF_POLITICAL_PARTY': "wdt:P102",
+    'MEMBER_OF_POLITICAL_PARTY_PROPERTY': "p:P102",
     'SHORT_NAME': "wdt:P1813",
     'SEX_OR_GENDER': "wdt:P21",
     'OFFICIAL_WEBSITE': "wdt:P856",

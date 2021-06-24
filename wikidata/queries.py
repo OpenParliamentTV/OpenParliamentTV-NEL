@@ -50,7 +50,7 @@ def get_all_members_of_parliament(parliament='DE'):
             BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
             BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
         }}
-        OPTIONAL {{ ?mdb {MEMBER_OF_POLITICAL_PARTY} ?party. OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
+        OPTIONAL {{ ?mdb {MEMBER_OF_POLITICAL_PARTY_PROPERTY} ?partyStatement_. ?partyStatement_ {member_of_political_party_ps} ?party.  OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
         FILTER('1949-01-01'^^xsd:dateTime <= ?partyEndDate_ || !BOUND(?partyEndDate_)).
         OPTIONAL {{
             ?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
@@ -63,7 +63,11 @@ def get_all_members_of_parliament(parliament='DE'):
         OPTIONAL {{ ?mdb {TWITTER_USERNAME} ?twitter. }}
         SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". ?mdb rdfs:label ?mdbLabel. ?mdb schema:description ?abstract. }}
         }}
-        """.format(**WIKIDATA_MAPPINGS, position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['PARLIAMENTARY_GROUP']), member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament])
+        """.format(**WIKIDATA_MAPPINGS, 
+            position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), 
+            parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['PARLIAMENTARY_GROUP']), 
+            member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament], 
+            member_of_political_party_ps = cps(WIKIDATA_MAPPINGS['MEMBER_OF_POLITICAL_PARTY_PROPERTY']))
     print(query_string)
     return query_string
 
