@@ -17,7 +17,7 @@ def reformat(obj):
         'type': 'party', 
         'id': id, 
         'label': label,
-        'socialMediaURIs': helpers.group_socials(flat),
+        'socialMediaIDs': helpers.group_socials(flat),
         **flat
     }
     return new
