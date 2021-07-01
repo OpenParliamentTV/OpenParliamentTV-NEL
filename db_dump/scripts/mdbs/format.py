@@ -14,11 +14,15 @@ def reformat(obj):
     id = flat.pop('mdb').split('/')[-1]
     label = flat.pop('mdbLabel')
     birthDate = flat.pop('dateOfBirth', None).replace('T00:00:00Z', '')
+    partyID = flat.pop('party', '').split('/')[-1]
+    factionID = flat.pop('faction', '').split('/')[-1]
     new = {
         'type': 'memberOfParliament', 
         'id': id, 
         'label': label, 
         'birthDate': birthDate,
+        'partyID': partyID if len(partyID)>0 else None,
+        'factionID': factionID if len(factionID)>0 else None,
         'socialMediaIDs': helpers.group_socials(flat),
         'additionalInformation': helpers.group_additional_information(flat),
         **flat
