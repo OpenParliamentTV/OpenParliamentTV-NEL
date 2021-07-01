@@ -8,9 +8,9 @@
       "facebook": "linksfraktion",
       "instagram": "linksfraktion"
     },
+    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Die_Linke_BT_Fraktion_Logo.svg/300px-Die_Linke_BT_Fraktion_Logo.svg",
     "abstract": "Fraktion im Deutschen Bundestag",
-    "websiteURI": "https://www.linksfraktion.de/",
-    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Die_Linke_BT_Fraktion_Logo.svg/300px-Die_Linke_BT_Fraktion_Logo.svg"
+    "websiteURI": "https://www.linksfraktion.de/"
   },
   {
     "type": "faction",
@@ -21,9 +21,9 @@
       "facebook": "cducsubundestagsfraktion",
       "instagram": "cducsubt"
     },
+    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Cducsu_fraktion_logo_rgb.svg/300px-Cducsu_fraktion_logo_rgb.svg",
     "abstract": "Fraktion von CDU und CSU im Deutschen Bundestag",
-    "websiteURI": "https://www.cducsu.de/",
-    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Cducsu_fraktion_logo_rgb.svg/300px-Cducsu_fraktion_logo_rgb.svg"
+    "websiteURI": "https://www.cducsu.de/"
   },
   {
     "type": "faction",
@@ -34,9 +34,9 @@
       "facebook": "fdpbt",
       "instagram": "fdpbt"
     },
+    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Logo_fdp_bundestagsfraktion.svg/300px-Logo_fdp_bundestagsfraktion.svg",
     "abstract": "Fraktion der FDP im Deutschen Bundestag",
-    "websiteURI": "https://www.fdpbt.de/",
-    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Logo_fdp_bundestagsfraktion.svg/300px-Logo_fdp_bundestagsfraktion.svg"
+    "websiteURI": "https://www.fdpbt.de/"
   },
   {
     "type": "faction",
@@ -59,9 +59,9 @@
       "facebook": "afdimbundestag",
       "instagram": "afdimbundestag"
     },
+    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/AFD_Fraktion_im_Bundestag_Logo.svg/300px-AFD_Fraktion_im_Bundestag_Logo.svg",
     "abstract": "Fraktion der Alternative f\u00fcr Deutschland im Deutschen Bundestag",
-    "websiteURI": "https://www.afdbundestag.de/",
-    "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/AFD_Fraktion_im_Bundestag_Logo.svg/300px-AFD_Fraktion_im_Bundestag_Logo.svg"
+    "websiteURI": "https://www.afdbundestag.de/"
   },
   {
     "type": "faction",
