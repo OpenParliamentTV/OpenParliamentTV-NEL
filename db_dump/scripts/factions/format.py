@@ -27,6 +27,6 @@ with open(INFILE) as infile:
     data = json.load(infile)
     entries = [reformat(entry) for entry in data['results']['bindings']]
     helpers.check_for_dups(entries)
-    with open(OUTFILE, 'w') as outfile:
-        json.dump(entries, outfile)
+    with open(OUTFILE, 'w', encoding='utf8') as outfile:
+        json.dump(entries, outfile, ensure_ascii=False)
 

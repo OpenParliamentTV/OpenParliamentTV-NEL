@@ -32,5 +32,5 @@ with open(INFILE) as infile:
     entries = [reformat(entry) for entry in data['results']['bindings']]
     for e in entries:
         print(json.dumps(e, indent=4, sort_keys=True))
-    with open(OUTFILE, 'w') as outfile:
-        json.dump(entries, outfile)
+    with open(OUTFILE, 'w', encoding='utf8') as outfile:
+        json.dump(entries, outfile, ensure_ascii=False)

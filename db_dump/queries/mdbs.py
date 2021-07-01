@@ -13,5 +13,5 @@ from wikidata.queries import get_all_members_of_parliament
 query = get_all_members_of_parliament(parliament="DE")
 results = wikidata_client.get(query)
 print(results)
-with open(OUTFILE, 'w') as outfile:
-    json.dump(results, outfile)
+with open(OUTFILE, 'w', encoding='utf8') as outfile:
+    json.dump(results, outfile, ensure_ascii=False)

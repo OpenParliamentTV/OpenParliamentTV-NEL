@@ -12,5 +12,5 @@ from wikidata.queries import get_all_factions_of_germany
 query = get_all_factions_of_germany()
 results = wikidata_client.get(query)
 print(results)
-with open(OUTFILE, 'w') as outfile:
-    json.dump(results, outfile)
+with open(OUTFILE, 'w', encoding='utf8') as outfile:
+    json.dump(results, outfile, ensure_ascii=False)

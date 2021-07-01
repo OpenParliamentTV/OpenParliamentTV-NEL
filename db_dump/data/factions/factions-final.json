@@ -64,14 +64,14 @@
       "instagram": "afdimbundestag"
     },
     "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/AFD_Fraktion_im_Bundestag_Logo.svg/300px-AFD_Fraktion_im_Bundestag_Logo.svg",
-    "abstract": "Fraktion der Alternative f\u00fcr Deutschland im Deutschen Bundestag",
+    "abstract": "Fraktion der Alternative für Deutschland im Deutschen Bundestag",
     "websiteURI": "https://www.afdbundestag.de/",
     "labelAlternative": "AfD"
   },
   {
     "type": "faction",
     "id": "Q1007353",
-    "label": "Bundestagsfraktion B\u00fcndnis 90/Die Gr\u00fcnen",
+    "label": "Bundestagsfraktion Bündnis 90/Die Grünen",
     "socialMediaURIs": {
       "twitter": "GrueneBundestag",
       "facebook": "Gruene.im.Bundestag",
@@ -79,6 +79,6 @@
     },
     "abstract": "Fraktion im Deutschen Bundestag",
     "websiteURI": "https://www.gruene-bundestag.de/",
-    "labelAlternative": "B\u00dcNDNIS 90/DIE GR\u00dcNEN"
+    "labelAlternative": "BÜNDNIS 90/DIE GRÜNEN"
   }
 ]

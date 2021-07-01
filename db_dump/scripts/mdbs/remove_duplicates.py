@@ -55,7 +55,7 @@ with open(INFILE) as infile:
         merged = merge_dicts_additively(g)
         cleaned.append(merged)
     cleaned.sort(key=get_id, reverse=True)
-    with open(OUTFILE, 'w') as outfile:
-        json.dump(cleaned, outfile)
+    with open(OUTFILE, 'w', encoding='utf8') as outfile:
+        json.dump(cleaned, outfile, ensure_ascii=False)
 
 
