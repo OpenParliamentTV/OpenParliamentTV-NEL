@@ -7,13 +7,13 @@ def group_socials(obj):
     twitter = obj.pop('twitter', None)
     facebook = obj.pop('facebook', None)
     instagram = obj.pop('instagram', None)
-    group = {}
+    group = []
     if twitter is not None:
-        group['twitter'] = twitter
+        group.append({'label': 'Twitter', 'id': twitter})
     if facebook is not None:
-        group['facebook'] = facebook
+        group.append({'label': 'Facebook', 'id': facebook})
     if instagram is not None:
-        group['instagram'] = instagram
+        group.append({'label': 'Instagram', 'id': instagram})
     return group
 
 def group_additional_information(obj):

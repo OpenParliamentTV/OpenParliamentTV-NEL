@@ -4,15 +4,18 @@ import ast
 INFILE = './db_dump/data/parties/parties-formatted.json'
 OUTFILE = './db_dump/data/parties/parties-final.json'
 
-def remove_dups_from_list(list):
-    if all(type(el) is dict for el in list):
+def remove_dups_from_list(thelist):
+    print("List", thelist)
+    if all(type(el) is dict for el in thelist):
         #we can't apply the set function to objects, lets convert them to string first
-        strings = [str for str in set([str(el) for el in list])]
+        strings = [str for str in set([str(el) for el in thelist])]
         return [ast.literal_eval(str) for str in strings]
-    elif any(type(el) is dict for el in list):
-        raise Exception("Can't remove list of duplicates. List of elements contains mixed types.")
+    elif all(isinstance(el, list) for el in thelist):
+        #we can't apply the set function to lists, lets convert them to string first
+        strings = [str for str in set([str(el) for el in thelist])]
+        return [ast.literal_eval(str) for str in strings]
     else:
-        return [el for el in set(list)]
+        return [el for el in set(thelist)]
 
 def get_all_keys(list_of_objects):
     keys = []

@@ -3,11 +3,11 @@
     "type": "faction",
     "id": "Q1826856",
     "label": "Fraktion Die Linke",
-    "socialMediaURIs": {
-      "twitter": "linksfraktion",
-      "facebook": "linksfraktion",
-      "instagram": "linksfraktion"
-    },
+    "socialMediaIDs": [
+      { "label": "Twitter", "id": "linksfraktion" },
+      { "label": "Facebook", "id": "linksfraktion" },
+      { "label": "Instagram", "id": "linksfraktion" }
+    ],
     "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Die_Linke_BT_Fraktion_Logo.svg/300px-Die_Linke_BT_Fraktion_Logo.svg",
     "abstract": "Fraktion im Deutschen Bundestag",
     "websiteURI": "https://www.linksfraktion.de/",
@@ -17,11 +17,11 @@
     "type": "faction",
     "id": "Q1023134",
     "label": "CDU/CSU-Bundestagsfraktion",
-    "socialMediaURIs": {
-      "twitter": "cducsubt",
-      "facebook": "cducsubundestagsfraktion",
-      "instagram": "cducsubt"
-    },
+    "socialMediaIDs": [
+      { "label": "Twitter", "id": "cducsubt" },
+      { "label": "Facebook", "id": "cducsubundestagsfraktion" },
+      { "label": "Instagram", "id": "cducsubt" }
+    ],
     "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Cducsu_fraktion_logo_rgb.svg/300px-Cducsu_fraktion_logo_rgb.svg",
     "abstract": "Fraktion von CDU und CSU im Deutschen Bundestag",
     "websiteURI": "https://www.cducsu.de/",
@@ -31,11 +31,11 @@
     "type": "faction",
     "id": "Q1387991",
     "label": "FDP-Bundestagsfraktion",
-    "socialMediaURIs": {
-      "twitter": "fdpbt",
-      "facebook": "fdpbt",
-      "instagram": "fdpbt"
-    },
+    "socialMediaIDs": [
+      { "label": "Twitter", "id": "fdpbt" },
+      { "label": "Facebook", "id": "fdpbt" },
+      { "label": "Instagram", "id": "fdpbt" }
+    ],
     "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Logo_fdp_bundestagsfraktion.svg/300px-Logo_fdp_bundestagsfraktion.svg",
     "abstract": "Fraktion der FDP im Deutschen Bundestag",
     "websiteURI": "https://www.fdpbt.de/",
@@ -45,11 +45,11 @@
     "type": "faction",
     "id": "Q2207512",
     "label": "SPD-Bundestagsfraktion",
-    "socialMediaURIs": {
-      "twitter": "spdbt",
-      "facebook": "spdbundestagsfraktion",
-      "instagram": "spdbt"
-    },
+    "socialMediaIDs": [
+      { "label": "Twitter", "id": "spdbt" },
+      { "label": "Facebook", "id": "spdbundestagsfraktion" },
+      { "label": "Instagram", "id": "spdbt" }
+    ],
     "abstract": "Fraktion der SPD-Abgeordneten im Deutschen Bundestag",
     "websiteURI": "https://www.spdfraktion.de/",
     "labelAlternative": "SPD"
@@ -58,11 +58,11 @@
     "type": "faction",
     "id": "Q42575708",
     "label": "AfD-Bundestagsfraktion",
-    "socialMediaURIs": {
-      "twitter": "AfDimBundestag",
-      "facebook": "afdimbundestag",
-      "instagram": "afdimbundestag"
-    },
+    "socialMediaIDs": [
+      { "label": "Twitter", "id": "AfDimBundestag" },
+      { "label": "Facebook", "id": "afdimbundestag" },
+      { "label": "Instagram", "id": "afdimbundestag" }
+    ],
     "thumbnailURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/AFD_Fraktion_im_Bundestag_Logo.svg/300px-AFD_Fraktion_im_Bundestag_Logo.svg",
     "abstract": "Fraktion der Alternative für Deutschland im Deutschen Bundestag",
     "websiteURI": "https://www.afdbundestag.de/",
@@ -72,11 +72,11 @@
     "type": "faction",
     "id": "Q1007353",
     "label": "Bundestagsfraktion Bündnis 90/Die Grünen",
-    "socialMediaURIs": {
-      "twitter": "GrueneBundestag",
-      "facebook": "Gruene.im.Bundestag",
-      "instagram": "gruenebundestag"
-    },
+    "socialMediaIDs": [
+      { "label": "Twitter", "id": "GrueneBundestag" },
+      { "label": "Facebook", "id": "Gruene.im.Bundestag" },
+      { "label": "Instagram", "id": "gruenebundestag" }
+    ],
     "abstract": "Fraktion im Deutschen Bundestag",
     "websiteURI": "https://www.gruene-bundestag.de/",
     "labelAlternative": "BÜNDNIS 90/DIE GRÜNEN"
