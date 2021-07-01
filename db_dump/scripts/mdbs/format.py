@@ -13,13 +13,13 @@ def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}
     id = flat.pop('mdb').split('/')[-1]
     label = flat.pop('mdbLabel')
-    birthDate = flat.pop('dateOfBirth', None)
+    birthDate = flat.pop('dateOfBirth', None).replace('T00:00:00Z', '')
     new = {
         'type': 'memberOfParliament', 
         'id': id, 
         'label': label, 
         'birthDate': birthDate,
-        'socialMediaURIs': helpers.group_socials(flat),
+        'socialMediaIDs': helpers.group_socials(flat),
         'additionalInformation': helpers.group_additional_information(flat),
         **flat
     }
