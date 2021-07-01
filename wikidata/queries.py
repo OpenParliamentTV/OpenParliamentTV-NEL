@@ -3,6 +3,28 @@ from wikidata.helpers import convert_to_property_statement as cps
 from wikidata.helpers import convert_to_qualifier_statement as cpq
 
 
+def get_all_factions_of_germany():
+    query_string = """
+    SELECT DISTINCT ?faction ?factionLabel ?abstract ?instagram ?facebook ?twitter ?thumbnailURI ?websiteURI  WHERE {{
+        ?faction {INSTANCE_OF} {FACTION}.
+        OPTIONAL {{?faction schema:description ?abstract. FILTER(lang(?abstract) = "de").}}
+        OPTIONAL {{ ?faction {INSTAGRAM_USERNAME} ?instagram. }}
+        OPTIONAL {{ ?faction {FACEBOOK_USERNAME} ?facebook. }}
+        OPTIONAL {{ ?faction {TWITTER_USERNAME} ?twitter. }}
+        OPTIONAL {{ ?faction {OFFICIAL_WEBSITE} ?websiteURI. }}
+        OPTIONAL {{
+            ?faction {LOGO_IMG} ?image_.
+            BIND(REPLACE(wikibase:decodeUri(STR(?image_)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") AS ?imageFileName_)
+            BIND(REPLACE(?imageFileName_, " ", "_") AS ?imageFileNameSafe_)
+            BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
+            BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
+        }}
+        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". }}
+    }}""".format(**WIKIDATA_MAPPINGS)
+    print(query_string)
+    return query_string
+
+
 def get_all_parties_of_germany():
     query_string = """
     SELECT DISTINCT ?ppg ?ppgLabel ?labelAlternative ?abstract ?thumbnailURI ?websiteURI ?instagram ?facebook ?twitter WHERE {{
