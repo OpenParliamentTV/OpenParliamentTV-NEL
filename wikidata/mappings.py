@@ -28,5 +28,7 @@ MAPPINGS = {
     'POLITICAL_PARTY_IN_GERMANY': "wd:Q2023214",
     'DISSOLVED_DATE': "wdt:P576",
     'LOGO_IMG': "wdt:P154",
-    'FACTION': "wd:Q1509758"
+    'FACTION': "wd:Q1509758",
+    'START_TIME': "pq:P580",
+    'END_TIME': "pq:P582",
 }
