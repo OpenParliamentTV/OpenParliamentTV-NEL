@@ -15,7 +15,13 @@ def remove_dups_from_list(thelist):
         strings = [str for str in set([str(el) for el in thelist])]
         return [ast.literal_eval(str) for str in strings]
     else:
-        return [el for el in set(thelist)]
+        nodups = [el for el in set(thelist)]
+        if len(nodups) > 1:
+            try: 
+                nodups.remove(None) #Remove value None only if there are other values present
+            except:
+                pass
+        return nodups
 
 def get_all_keys(list_of_objects):
     keys = []
