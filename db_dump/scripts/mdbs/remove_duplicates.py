@@ -15,13 +15,7 @@ def remove_dups_from_list(thelist):
         strings = [str for str in set([str(el) for el in thelist])]
         return [ast.literal_eval(str) for str in strings]
     else:
-        nodups = [el for el in set(thelist)]
-        if len(nodups) > 1:
-            try: 
-                nodups.remove(None) #Remove value None only if there are other values present
-            except:
-                pass
-        return nodups
+        return [el for el in set(thelist)]
 
 def get_all_keys(list_of_objects):
     keys = []
@@ -40,6 +34,11 @@ def merge_dicts_additively(dicts):
                 pass
         result[key] =  remove_dups_from_list(result[key])
         #Remove lists with only 1 element
+        if(len(result[key])>1):
+            try: 
+                result[key].remove(None) #Remove value None only if there are other values present
+            except:
+                pass
         if(len(result[key])==1):
             result[key] = result[key][0]
     return result
