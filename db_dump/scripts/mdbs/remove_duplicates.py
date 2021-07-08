@@ -26,9 +26,12 @@ def resolve_factions(entries):
             return entries_with_faction_id[0]['factionID']
         if(len(set([e['factionID'] for e in entries_with_faction_id]))) == 1: #Case: All faction ids are identical
             return entries_with_faction_id[0]['factionID']
+        #Situation: We have multiple factions and need to decide which is the most actual one
+        #Intuition 1: We take the one that has no end time (assuming it means that this faction is the recent one)
         no_endtime = [entry for entry in entries_with_faction_id if 'factionEndTime' not in entry]
         if len(no_endtime)>0:
             return no_endtime[0]['factionID']
+        #Fallback: If there is no faction with missing end time, we sort the factions by start time and take the newest one
         newest_start_date = entries_with_faction_id.sorted(key=lambda x: datetime.datetime.strptime(x['factionStartTime'].replace('T00:00:00Z', ''), '%Y-%m-%d'), reverse=True)
         return newest_start_date[0]['factionID']
 
