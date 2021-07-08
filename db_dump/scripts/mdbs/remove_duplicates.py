@@ -5,7 +5,6 @@ INFILE = './db_dump/data/mdbs/mdbs-formatted.json'
 OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
 
 def remove_dups_from_list(thelist):
-    print("List", thelist)
     if all(type(el) is dict for el in thelist):
         #we can't apply the set function to objects, lets convert them to string first
         strings = [str for str in set([str(el) for el in thelist])]
@@ -24,6 +23,10 @@ def get_all_keys(list_of_objects):
     return set(keys)
 
 def merge_dicts_additively(dicts):
+    if(len(dicts)==1):
+        print("/// No duplicate entries detected. Continue with next ID")
+        return dicts[0]
+    print("/// Number of duplicates detected: ", len(dicts))
     result = {}
     for key in get_all_keys(dicts):
         result[key] = []
@@ -40,6 +43,8 @@ def merge_dicts_additively(dicts):
             except:
                 pass
         #Remove lists with only 1 element
+        print(key)
+        if(len(result[key])>1): print("*")
         if(len(result[key])==1):
             result[key] = result[key][0]
     return result
@@ -61,7 +66,8 @@ with open(INFILE) as infile:
     cleaned = []
     groups = group_records_by_ids(data)
     for g in groups:
-        print(g)
+        print("")
+        print("/// Currently handling", g[0]['id'], g[0]['label'])
         merged = merge_dicts_additively(g)
         cleaned.append(merged)
     cleaned.sort(key=get_id, reverse=True)
