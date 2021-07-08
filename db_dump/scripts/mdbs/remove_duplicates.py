@@ -7,6 +7,11 @@ OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
 
 faction_keywords = ['factionID', 'factionStartTime', 'factionEndTime']
 
+def clean_up(entry):
+    for keyword in faction_keywords:
+        if keyword in entry:
+            del entry[keyword]
+    return entry
 
 def resolve_factions(entries):
     print("///Resolve factions for", entries[0]['id'])
@@ -47,7 +52,7 @@ def get_all_keys(list_of_objects):
 def merge_dicts_additively(dicts):
     if(len(dicts)==1):
         print("/// No duplicate entries detected. Continue with next ID")
-        return dicts[0]
+        return clean_up(dicts[0])
     print("/// Number of duplicates detected: ", len(dicts))
     result = {}
     for key in get_all_keys(dicts):
