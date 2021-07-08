@@ -1,8 +1,30 @@
 import json
 import ast
+import datetime
 
 INFILE = './db_dump/data/mdbs/mdbs-formatted.json'
 OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
+
+faction_keywords = ['factionID', 'factionStartTime', 'factionEndTime']
+
+
+def resolve_factions(entries):
+    print("///Resolve factions for", entries[0]['id'])
+    if len(entries)==1:
+        return entries[0]['factionID']
+    else:
+        entries_with_faction_id = [entry for entry in entries if entry['factionID'] is not None]
+        if(len(entries_with_faction_id)==0): #Case: empty list
+            return None
+        if(len(entries_with_faction_id)==1): #Case: There is just one option
+            return entries_with_faction_id[0]['factionID']
+        if(len(set([e['factionID'] for e in entries_with_faction_id]))) == 1: #Case: All faction ids are identical
+            return entries_with_faction_id[0]['factionID']
+        no_endtime = [entry for entry in entries_with_faction_id if 'factionEndTime' not in entry]
+        if len(no_endtime)>0:
+            return no_endtime[0]['factionID']
+        newest_start_date = entries_with_faction_id.sorted(key=lambda x: datetime.datetime.strptime(x['factionStartTime'].replace('T00:00:00Z', ''), '%Y-%m-%d'), reverse=True)
+        return newest_start_date[0]['factionID']
 
 def remove_dups_from_list(thelist):
     if all(type(el) is dict for el in thelist):
@@ -29,6 +51,8 @@ def merge_dicts_additively(dicts):
     print("/// Number of duplicates detected: ", len(dicts))
     result = {}
     for key in get_all_keys(dicts):
+        if key in faction_keywords: #we'll deal with the factions later...
+            continue
         result[key] = []
         for dic in dicts:
             try:
@@ -43,10 +67,9 @@ def merge_dicts_additively(dicts):
             except:
                 pass
         #Remove lists with only 1 element
-        print(key)
-        if(len(result[key])>1): print("*")
         if(len(result[key])==1):
             result[key] = result[key][0]
+    result['factionID'] = resolve_factions(dicts)
     return result
 
 
