@@ -6,9 +6,10 @@ INFILE = './db_dump/data/mdbs/mdbs-formatted.json'
 OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
 
 faction_keywords = ['factionID', 'factionStartTime', 'factionEndTime']
+keywords_to_remove_from_final_output = ['factionStartTime', 'factionEndTime']
 
 def clean_up(entry):
-    for keyword in faction_keywords:
+    for keyword in keywords_to_remove_from_final_output:
         if keyword in entry:
             del entry[keyword]
     return entry
