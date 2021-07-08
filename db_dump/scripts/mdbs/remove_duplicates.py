@@ -33,12 +33,13 @@ def merge_dicts_additively(dicts):
             except: #...exception: Key is not present
                 pass
         result[key] =  remove_dups_from_list(result[key])
-        #Remove lists with only 1 element
+        #Remove value None only if there are other values present
         if(len(result[key])>1):
             try: 
-                result[key].remove(None) #Remove value None only if there are other values present
+                result[key].remove(None) 
             except:
                 pass
+        #Remove lists with only 1 element
         if(len(result[key])==1):
             result[key] = result[key][0]
     return result
