@@ -54,7 +54,7 @@ def get_all_parties_of_germany():
 
 def get_all_members_of_parliament(parliament='DE'):    
     query_string = """
-    SELECT DISTINCT ?mdb ?mdbLabel ?faction ?factionStartTime ?factionEndTime ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
+    SELECT DISTINCT ?mdb ?mdbLabel ?faction ?factionStartTime ?factionEndTime ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
         SELECT ?mdb ?humansWithPositionHeld WHERE {{
             ?mdb {INSTANCE_OF} {HUMAN}.
             ?mdb {POSITION_HELD} ?humansWithPositionHeld.
@@ -66,6 +66,7 @@ def get_all_members_of_parliament(parliament='DE'):
             OPTIONAL {{ ?humansWithPositionHeld {START_TIME} ?factionStartTime.}} 
             OPTIONAL {{?humansWithPositionHeld {END_TIME} ?factionEndTime.}} 
         }}
+        OPTIONAL {{ ?mdb {AFFILIATION} ?affiliation. }}
         OPTIONAL {{ ?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
         OPTIONAL {{ ?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{ ?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
