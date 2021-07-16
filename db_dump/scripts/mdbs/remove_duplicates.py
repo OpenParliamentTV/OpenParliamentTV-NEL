@@ -3,7 +3,7 @@ import ast
 import datetime
 
 INFILE = './db_dump/data/mdbs/mdbs-formatted.json'
-OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
+OUTFILE = './db_dump/data/mdbs/mdbs-deduped.json'
 
 faction_keywords = ['factionID', 'factionStartTime', 'factionEndTime']
 keywords_to_remove_from_final_output = ['factionStartTime', 'factionEndTime']

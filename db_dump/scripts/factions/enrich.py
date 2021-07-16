@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from urllib.request import urlopen
+
 
 #add project root to path so I can import a module from the wikidata folder
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))))
