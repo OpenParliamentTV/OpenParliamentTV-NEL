@@ -15,5 +15,9 @@ def get_faction(abgeordnetenwatchID, parliament_name="Bundestag"):
         faction_membership = faction_membership[0]
     return faction_membership
 
-faction = get_faction(29199)
-print(faction)
+def get_party(abgeordnetenwatchID):
+    response = requests.get(ENDPOINT_URL + "politicians/" + str(abgeordnetenwatchID))
+    print(response)
+    politician_data = response.json()['data']
+    party = politician_data.get('party')
+    return party
