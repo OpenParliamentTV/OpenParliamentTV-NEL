@@ -2,11 +2,15 @@
 
 e.g. via the command: pipenv shell
 
-### Get dumps, e.g. members of German Bundestag:
+### Get dumps:
 
-1. python db_dump/queries/mdbs.py
-2. python db_dump/scripts/mdbs/format.py
-3. python db_dump/scripts/mdbs/remove_duplicates.py
+#### Order matters:
+
+1. generate parties dump
+2. generate mappings file (abgeordnetenwath/scripts/generate_mapping)
+3. then generate factions and mdb dump
+
+Important: For each specific dump, follow the README inside the specific folder, order matters here as well:
 
 Final json will be saved to:
 db_dump/data/mdbs/mdbs-final.json
