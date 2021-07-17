@@ -17,6 +17,12 @@ def add_shortname(faction):
 with open(INFILE) as infile:
     data = json.load(infile)
     entries = [add_shortname(faction) for faction in data]
+    entries.append({
+        'type': 'faction', 
+        'id': 'Q4316268', 
+        'label': 'fraktionslos',
+        'abstract': 'fraktionslose Abgeordnete'
+    })
     with open(OUTFILE, 'w', encoding='utf8') as outfile:
         json.dump(entries, outfile, ensure_ascii=False)
         

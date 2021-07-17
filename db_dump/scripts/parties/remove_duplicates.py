@@ -58,6 +58,12 @@ with open(INFILE) as infile:
         merged = merge_dicts_additively(g)
         cleaned.append(merged)
     cleaned.sort(key=get_id, reverse=True)
+    cleaned.append({
+        'type': 'party', 
+        'id': 'Q2415493', 
+        'label': 'parteilos',
+        'abstract': 'keiner (politischen) Partei angehörend'
+    })
     with open(OUTFILE, 'w', encoding='utf8') as outfile:
         json.dump(cleaned, outfile, ensure_ascii=False)
 
