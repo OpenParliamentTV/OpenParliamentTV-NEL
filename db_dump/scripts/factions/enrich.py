@@ -21,7 +21,11 @@ with open(INFILE) as infile:
         'type': 'faction', 
         'id': 'Q4316268', 
         'label': 'fraktionslos',
-        'abstract': 'fraktionslose Abgeordnete'
+        'socialMediaIDs': [],
+        'thumbnailURI': '',
+        'abstract': 'fraktionslose Abgeordnete',
+        'websiteURI': '',
+        'labelAlternative': 'fraktionslos'
     })
     with open(OUTFILE, 'w', encoding='utf8') as outfile:
         json.dump(entries, outfile, ensure_ascii=False)

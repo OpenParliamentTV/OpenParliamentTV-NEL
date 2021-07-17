@@ -62,7 +62,11 @@ with open(INFILE) as infile:
         'type': 'party', 
         'id': 'Q2415493', 
         'label': 'parteilos',
-        'abstract': 'keiner (politischen) Partei angehörend'
+        'socialMediaIDs': [],
+        'thumbnailURI': '',
+        'abstract': 'keiner (politischen) Partei angehörend',
+        'websiteURI': '',
+        'labelAlternative': 'parteilos'
     })
     with open(OUTFILE, 'w', encoding='utf8') as outfile:
         json.dump(cleaned, outfile, ensure_ascii=False)
