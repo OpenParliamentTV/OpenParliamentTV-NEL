@@ -13,6 +13,7 @@ MAPPINGS = {
         "DE-BY": "wd:Q17586301"
     },
     "NATIVE_LABEL": "wdt:P1705",
+    "ALT_LABEL": "skos:altLabel",
     "IMAGE": "wdt:P18",
     "MEMBER_OF_POLITICAL_PARTY": "wdt:P102",
     "MEMBER_OF_POLITICAL_PARTY_PROPERTY": "p:P102",

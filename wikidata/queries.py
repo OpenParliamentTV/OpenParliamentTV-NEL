@@ -54,7 +54,7 @@ def get_all_parties_of_germany():
 
 def get_all_members_of_parliament(parliament='DE'):    
     query_string = """
-    SELECT DISTINCT ?mdb ?mdbLabel ?faction ?factionStartTime ?factionEndTime ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
+    SELECT DISTINCT ?mdb ?mdbLabel ?altLabel ?faction ?factionStartTime ?factionEndTime ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
         SELECT ?mdb ?humansWithPositionHeld WHERE {{
             ?mdb {INSTANCE_OF} {HUMAN}.
             ?mdb {POSITION_HELD} ?humansWithPositionHeld.
@@ -67,6 +67,7 @@ def get_all_members_of_parliament(parliament='DE'):
             OPTIONAL {{?humansWithPositionHeld {END_TIME} ?factionEndTime.}} 
         }}
         OPTIONAL {{ ?mdb {AFFILIATION} ?affiliation. }}
+        OPTIONAL {{ ?mdb {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
         OPTIONAL {{ ?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
         OPTIONAL {{ ?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{ ?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
@@ -104,13 +105,14 @@ def get_all_members_of_parliament(parliament='DE'):
 # Workaround is to filter the members by date of birth, and get the results in multiple batches
 def get_all_members_of_parliament_filtered_by_birth(parliament='DE', min_birth='1800-01-01', max_birth='2030-01-01'):    
     query_string = """
-    SELECT DISTINCT ?mdb ?mdbLabel ?faction ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WHERE {{
+    SELECT DISTINCT ?mdb ?mdbLabel ?altLabel ?faction ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WHERE {{
         ?mdb {INSTANCE_OF} {HUMAN}.
         ?mdb {POSITION_HELD} ?humansWithPositionHeld.
         ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
         OPTIONAL {{ ?humansWithPositionHeld {parliamentary_group_pq} ?faction. }}
         ?mdb rdfs:label ?mdbString.
         OPTIONAL {{ ?mdb schema:description ?abstract. FILTER(lang(?abstract) = "de"). }}
+        OPTIONAL {{ ?mdb {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
         OPTIONAL {{ ?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
         OPTIONAL {{ ?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
         OPTIONAL {{ ?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
