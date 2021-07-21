@@ -17,7 +17,8 @@ def get_all_factions_of_germany():
             BIND(REPLACE(wikibase:decodeUri(STR(?image_)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") AS ?imageFileName_)
             BIND(REPLACE(?imageFileName_, " ", "_") AS ?imageFileNameSafe_)
             BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
-            BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
+            BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURIClean)
+            BIND(REPLACE(?thumbnailURIClean, "\\\\.svg$", ".png") AS ?thumbnailURI)
         }}
         SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". }}
     }}""".format(**WIKIDATA_MAPPINGS)
