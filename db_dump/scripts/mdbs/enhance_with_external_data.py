@@ -21,8 +21,9 @@ def add_faction_from_abgeordnetenwatch(abgeordnetenwatch_id, entry):
 def add_party_from_abgeordnetenwatch(abgeordnetenwatch_id, entry):
     party = abgeordnetenwatch_client.get_party(abgeordnetenwatch_id)
     if party is not None:
+        print(party)
         #Note: This overwrites a previously existing partyID from Wikidata.
-        entry['AwPartyID'] = convert_to_wikidata_party_id(party)
+        entry['partyID'] = convert_to_wikidata_party_id(party)
     return entry
 
 

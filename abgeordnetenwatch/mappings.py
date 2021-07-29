@@ -1,4 +1,6 @@
-#Bundestag Fraktionen...
+import json
+PARTY_MAPPING_FILE = 'abgeordnetenwatch/party-mapping.json'
+
 #TODO: This could be improved by strictly checking IDs instead of fuzzy stringmatching..
 def convert_to_wikidata_faction_id(aw_faction_object):
     faction_label = aw_faction_object.get('fraction', {}).get('label')
@@ -20,19 +22,9 @@ def convert_to_wikidata_faction_id(aw_faction_object):
 
 
 def convert_to_wikidata_party_id(aw_party_object):
-    aw_party_id = aw_party_object.get('id')
-    print(aw_party_id)
-    if aw_party_id == 1:
-        return "QSPD"
-    if aw_party_id == 2:
-        return 'QCDU'
-    if aw_party_id == 3:
-        return 'QCSU'
-    if aw_party_id == 4:
-        return 'QFDP'
-    if aw_party_id == 5:
-        return 'QGRÜ'
-    if aw_party_id == 6:
-        return 'PIRATEN'
-    
-    return aw_party_object.get('label')
+    with open(PARTY_MAPPING_FILE) as party_mapping_file:
+        party_mapping = json.load(party_mapping_file)
+        aw_party_id = str(aw_party_object.get('id'))
+        if aw_party_id not in party_mapping:
+            return aw_party_object.get('label')
+        return party_mapping[aw_party_id]
