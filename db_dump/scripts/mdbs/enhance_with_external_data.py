@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
 import abgeordnetenwatch.client as abgeordnetenwatch_client
 from abgeordnetenwatch.mappings import convert_to_wikidata_faction_id
 from abgeordnetenwatch.mappings import convert_to_wikidata_party_id
+from wikimedia_commons.helpers import extract_image_license
 
 INFILE = './db_dump/data/mdbs/mdbs-deduped.json'
 OUTFILE = './db_dump/data/mdbs/mdbs-final.json'
@@ -42,6 +43,15 @@ with open(INFILE) as infile:
             if abgeordnetenwatch_id is not None:
                 add_faction_from_abgeordnetenwatch(abgeordnetenwatch_id, entry)
                 add_party_from_abgeordnetenwatch(abgeordnetenwatch_id, entry)
+
+        #Add thumbnailCreator and thumbnailLicense from Wikimedia Commons
+        thumbnail_uri = entry.get("thumbnailURI")
+        if thumbnail_uri is not None:
+            license_info = extract_image_license(thumbnail_uri)
+            entry['thumbnailCreator'] = license_info['creator']
+            entry['thumbnailLicense'] = license_info['license']
+            print(license_info)
+
         result.append(entry)
         counter = counter + 1
     with open(OUTFILE, 'w', encoding='utf8') as outfile:
