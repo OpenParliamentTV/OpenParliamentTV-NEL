@@ -6,8 +6,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 import helpers
 
 
-INFILE = 'db_dump/data/mdbs/mdbs-rawqueryresults.json'
-OUTFILE = 'db_dump/data/mdbs/mdbs-formatted.json'
+INFILE_DE = 'db_dump/data/mdbs/mdbs-rawqueryresults_DE.json'
+OUTFILE_DE = 'db_dump/data/mdbs/mdbs-formatted_DE.json'
+
+INFILE_DE_BB = 'db_dump/data/mdbs/mdbs-rawqueryresults_DE-BB.json'
+OUTFILE_DE_BB = 'db_dump/data/mdbs/mdbs-formatted_DE-BB.json'
 
 def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}
@@ -29,12 +32,16 @@ def reformat(obj):
     }
     return new
 
+def process_file(infile_path, outfile_path):
+    # map over the entries and reformat each of them (reformatting means changing property names or grouping properties)
+    with open(infile_path) as infile:
+        data = json.load(infile)
+        entries = [reformat(entry) for entry in data['results']['bindings']]
+        for e in entries:
+            print(json.dumps(e, indent=4, sort_keys=True))
+        with open(outfile_path, 'w', encoding='utf8') as outfile:
+            json.dump(entries, outfile, ensure_ascii=False)
 
-# map over the entries and reformat each of them (reformatting means changing property names or grouping properties)
-with open(INFILE) as infile:
-    data = json.load(infile)
-    entries = [reformat(entry) for entry in data['results']['bindings']]
-    for e in entries:
-        print(json.dumps(e, indent=4, sort_keys=True))
-    with open(OUTFILE, 'w', encoding='utf8') as outfile:
-        json.dump(entries, outfile, ensure_ascii=False)
+
+process_file(INFILE_DE, OUTFILE_DE)
+process_file(INFILE_DE_BB, OUTFILE_DE_BB)

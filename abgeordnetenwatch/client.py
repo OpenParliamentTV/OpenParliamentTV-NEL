@@ -2,7 +2,13 @@ import requests
 
 ENDPOINT_URL = "https://www.abgeordnetenwatch.de/api/v2/"
 
-def get_faction(abgeordnetenwatchID, parliament_name="Bundestag"):
+def get_faction(abgeordnetenwatchID, parliament):
+    
+    if parliament == 'DE':
+        parliament_name = "Bundestag"
+    elif parliament == 'DE-BB':
+        parliament_name = "Brandenburg"
+    
     response = requests.get(ENDPOINT_URL + "candidacies-mandates?politician[entity.politician.id]=" + str(abgeordnetenwatchID))
     print(response)
     mandates = response.json()['data']

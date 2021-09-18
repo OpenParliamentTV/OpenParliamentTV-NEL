@@ -2,8 +2,11 @@ import json
 import ast
 import datetime
 
-INFILE = './db_dump/data/mdbs/mdbs-formatted.json'
-OUTFILE = './db_dump/data/mdbs/mdbs-deduped.json'
+INFILE_DE = './db_dump/data/mdbs/mdbs-formatted_DE.json'
+OUTFILE_DE = './db_dump/data/mdbs/mdbs-deduped_DE.json'
+
+INFILE_DE_BB = './db_dump/data/mdbs/mdbs-formatted_DE-BB.json'
+OUTFILE_DE_BB = './db_dump/data/mdbs/mdbs-deduped_DE-BB.json'
 
 faction_keywords = ['factionID', 'factionStartTime', 'factionEndTime']
 keywords_to_remove_from_final_output = ['factionStartTime', 'factionEndTime']
@@ -93,17 +96,19 @@ def get_id(mdb):
     key = int(mdb['id'][1:]) #remove the Q from the ID
     return key
 
-with open(INFILE) as infile:
-    data = json.load(infile)
-    cleaned = []
-    groups = group_records_by_ids(data)
-    for g in groups:
-        print("")
-        print("/// Currently handling", g[0]['id'], g[0]['label'])
-        merged = merge_dicts_additively(g)
-        cleaned.append(merged)
-    cleaned.sort(key=get_id, reverse=True)
-    with open(OUTFILE, 'w', encoding='utf8') as outfile:
-        json.dump(cleaned, outfile, ensure_ascii=False)
+def process_file(infile_path, outfile_path):
+    with open(infile_path) as infile:
+        data = json.load(infile)
+        cleaned = []
+        groups = group_records_by_ids(data)
+        for g in groups:
+            print("")
+            print("/// Currently handling", g[0]['id'], g[0]['label'])
+            merged = merge_dicts_additively(g)
+            cleaned.append(merged)
+        cleaned.sort(key=get_id, reverse=True)
+        with open(outfile_path, 'w', encoding='utf8') as outfile:
+            json.dump(cleaned, outfile, ensure_ascii=False)
 
-
+process_file(INFILE_DE, OUTFILE_DE)
+process_file(INFILE_DE_BB, OUTFILE_DE_BB)

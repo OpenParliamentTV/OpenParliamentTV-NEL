@@ -6,7 +6,8 @@ from wikidata.helpers import convert_to_qualifier_statement as cpq
 def get_all_factions_of_germany():
     query_string = """
     SELECT DISTINCT ?faction ?factionLabel ?abstract ?instagram ?facebook ?twitter ?thumbnailURI ?websiteURI  WHERE {{
-        ?faction {INSTANCE_OF} {FACTION}.
+        ?faction {INSTANCE_OF_OR_SUBCLASS_OF} {FACTION};
+                 {SOVEREIGN_STATE_OF_ITEM} {GERMANY}.
         OPTIONAL {{?faction schema:description ?abstract. FILTER(lang(?abstract) = "de").}}
         OPTIONAL {{ ?faction {INSTAGRAM_USERNAME} ?instagram. }}
         OPTIONAL {{ ?faction {FACEBOOK_USERNAME} ?facebook. }}

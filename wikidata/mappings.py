@@ -1,5 +1,6 @@
 MAPPINGS = {
     "INSTANCE_OF": "wdt:P31",
+    "INSTANCE_OF_OR_SUBCLASS_OF": "p:P31/ps:P31/wdt:P279*",
     "HUMAN": "wd:Q5",
     "FAMILY_NAME": "wdt:P734",
     "GIVEN_NAME": "wdt:P735",
@@ -10,7 +11,8 @@ MAPPINGS = {
     "POSITION_HELD": "p:P39",
     "MEMBER_OF_PARLIAMENT":  {
         "DE": "wd:Q1939555",
-        "DE-BY": "wd:Q17586301"
+        "DE-BY": "wd:Q17586301",
+        "DE-BB": "wd:Q18556824"
     },
     "NATIVE_LABEL": "wdt:P1705",
     "ALT_LABEL": "skos:altLabel",
@@ -29,8 +31,10 @@ MAPPINGS = {
     "POLITICAL_PARTY_IN_GERMANY": "wd:Q2023214",
     "DISSOLVED_DATE": "wdt:P576",
     "LOGO_IMG": "wdt:P154",
-    "FACTION": "wd:Q1509758",
+    "FACTION": "wd:Q848197",
     "START_TIME": "pq:P580",
     "END_TIME": "pq:P582",
-    "AFFILIATION": "wdt:P1416"
+    "AFFILIATION": "wdt:P1416",
+    "GERMANY": "wd:Q183",
+    "SOVEREIGN_STATE_OF_ITEM": "wdt:P17"
 }
