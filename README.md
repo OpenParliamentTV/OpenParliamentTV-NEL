@@ -1,3 +1,9 @@
+This repository will contain NEL functionality for Open Parliament TV in the future. Right now it only generates custom Wikidata Dumps.
+
+This README is not fully up to date and the repository is very much work in progress. We're working on updating it.
+
+-----
+
 ## Activate the virtual environment of your choice
 
 e.g. via the command: pipenv shell
@@ -26,9 +32,9 @@ Note: Order DOES matter here:
 
 Follow the README in db_dump/scripts/parties
 
-### 2. Algorithmwatch Mappings
+### 2. Abgeordnetenwatch Mappings
 
-python abgeordnetenwath/scripts/generate_mapping.py
+python abgeordnetenwatch/scripts/generate_mapping.py
 
 ### 3. Mdbs
 
@@ -46,5 +52,5 @@ db_dump/data/parties/parties-final.json
 
 ### Notes about our approach:
 
-- Our main source of data is WikiData
-- Sometimes WikiData has weird information (e.g. parties of a mdb are not sorted or not complete. Factions are also problematic.), in this case we use AbgeordnetenWatch as a datasource, but map the ids back to WikiData
+- Our main source of data is Wikidata
+- Sometimes Wikidata has weird information (e.g. parties of a mdb are not sorted or not complete. Factions are also problematic.), in this case we use Abgeordnetenwatch as a datasource, but map the IDs back to Wikidata
