@@ -16,7 +16,10 @@ def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}
     id = flat.pop('mdb').split('/')[-1]
     label = flat.pop('mdbLabel')
-    birthDate = flat.pop('dateOfBirth', None).replace('T00:00:00Z', '')
+    birthDate = None
+    if 'dateOfBirth' in flat:
+        birthDate = flat.pop('dateOfBirth', None).replace('T00:00:00Z', '')
+
     partyID = flat.pop('party', '').split('/')[-1]
     factionID = flat.pop('faction', '').split('/')[-1]
     new = {
