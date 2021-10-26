@@ -61,5 +61,5 @@ def process_file(infile_path, outfile_path, parliament):
             pass
             json.dump(result, outfile, ensure_ascii=False)
 
-#process_file(INFILE_DE, OUTFILE_DE, 'DE')
-process_file(INFILE_DE_BB, OUTFILE_DE_BB, 'DE-BB')
+process_file(INFILE_DE, OUTFILE_DE, 'DE')
+#process_file(INFILE_DE_BB, OUTFILE_DE_BB, 'DE-BB')
