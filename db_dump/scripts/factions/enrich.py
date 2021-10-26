@@ -11,7 +11,9 @@ INFILE = 'db_dump/data/factions/factions-formatted.json'
 OUTFILE = 'db_dump/data/factions/factions-final.json'
 
 def add_shortname(faction):
-    faction['labelAlternative'] = FACTION_SHORT_NAMES[faction['id']]
+    
+    if faction['id'] in FACTION_SHORT_NAMES:
+        faction['labelAlternative'] = FACTION_SHORT_NAMES[faction['id']]
     return faction
 
 with open(INFILE) as infile:
