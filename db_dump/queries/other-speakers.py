@@ -5,11 +5,11 @@ sys.path.append(rootdir)
 
 import json
 import wikidata.client as wikidata_client
-from wikidata.queries import get_all_members_of_bundesrat
+from wikidata.queries import get_all_potential_other_speakers_in_bundestag
 
 OUTFILE = 'db_dump/data/other-speakers/other-speakers-rawqueryresults.json'
 
-query_DE = get_all_members_of_bundesrat()
+query_DE = get_all_potential_other_speakers_in_bundestag()
 
 results_DE = wikidata_client.get(query_DE)
 

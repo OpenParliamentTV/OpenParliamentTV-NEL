@@ -2,22 +2,22 @@ from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
 from wikidata.helpers import convert_to_property_statement as cps
 from wikidata.helpers import convert_to_qualifier_statement as cpq
 
-def get_all_members_of_bundesrat():    
+def get_all_potential_other_speakers_in_bundestag():    
     query_string = """
-    SELECT DISTINCT ?member ?memberLabel ?altLabel ?faction ?factionStartTime ?factionEndTime ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
+    SELECT DISTINCT ?member ?memberLabel ?altLabel ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
         SELECT ?member ?humansWithPositionHeld WHERE {{
             ?member {INSTANCE_OF} {HUMAN}.
             ?member {POSITION_HELD} ?humansWithPositionHeld.
             {{ ?humansWithPositionHeld {position_held_ps} {MEMBER_OF_BUNDESRAT}.}} 
             UNION 
             {{ ?humansWithPositionHeld {position_held_ps} {DEPUTY_MEMBER_OF_BUNDESRAT}.}}
+            UNION 
+            {{ ?humansWithPositionHeld {position_held_ps} ?minister. ?minister {SUBCLASS_OF} {BUNDES_MINISTER}. }}  
+            UNION 
+            {{ ?humansWithPositionHeld {position_held_ps} ?beauftragter. ?beauftragter {SUBCLASS_OF} {BUNDES_BEAUFTRAGTER}. }}  
         }} }} AS %i
     WHERE {{
         INCLUDE %i
-        OPTIONAL {{ ?humansWithPositionHeld {parliamentary_group_pq} ?faction. 
-            OPTIONAL {{ ?humansWithPositionHeld {START_TIME} ?factionStartTime.}} 
-            OPTIONAL {{?humansWithPositionHeld {END_TIME} ?factionEndTime.}} 
-        }}
         OPTIONAL {{ ?member {AFFILIATION} ?affiliation. }}
         OPTIONAL {{ ?member {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
         OPTIONAL {{ ?member {DATE_OF_BIRTH} ?dateOfBirth. }}
