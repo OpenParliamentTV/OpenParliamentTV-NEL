@@ -2,13 +2,13 @@ This repository will contain NEL functionality for Open Parliament TV in the fut
 
 This README is not fully up to date and the repository is very much work in progress. We're working on updating it.
 
------
+---
 
 ## Activate the virtual environment of your choice
 
 e.g. via the command: pipenv shell
 
-## Excecute Wikidata queries:
+## Execute Wikidata queries:
 
 (Order doesn't matter here)
 
@@ -24,7 +24,11 @@ python db_dump/queries/parties.py
 
 python db_dump/queries/factions.py
 
-## Excecute Scripts to generate the final dumps:
+### Other speakers:
+
+python db_dump/queries/other-speakers.py
+
+## Execute Scripts to generate the final dumps:
 
 Note: Order DOES matter here:
 
@@ -38,11 +42,15 @@ python abgeordnetenwatch/scripts/generate_mapping.py
 
 ### 3. Mdbs
 
-Follow the README in db_dump/scripts/parties
+Follow the README in db_dump/scripts/mdbs
 
 ### 4. Factions
 
 Follow the README in db_dump/scripts/factions
+
+### 5. Other speakers
+
+Follow the README in db_dump/scripts/other-speakers
 
 #### Final json dumps will be saved to:
 
