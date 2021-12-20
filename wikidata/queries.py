@@ -4,10 +4,10 @@ from wikidata.helpers import convert_to_qualifier_statement as cpq
 
 def get_all_potential_other_speakers_in_bundestag():    
     query_string = """
-    SELECT DISTINCT ?member ?memberLabel ?altLabel ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
-        SELECT ?member ?humansWithPositionHeld WHERE {{
-            ?member {INSTANCE_OF} {HUMAN}.
-            ?member {POSITION_HELD} ?humansWithPositionHeld.
+    SELECT DISTINCT ?person ?personLabel ?altLabel ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
+        SELECT ?person ?humansWithPositionHeld WHERE {{
+            ?person {INSTANCE_OF} {HUMAN}.
+            ?person {POSITION_HELD} ?humansWithPositionHeld.
             {{ ?humansWithPositionHeld {position_held_ps} {MEMBER_OF_BUNDESRAT}.}} 
             UNION 
             {{ ?humansWithPositionHeld {position_held_ps} {DEPUTY_MEMBER_OF_BUNDESRAT}.}}
@@ -18,30 +18,30 @@ def get_all_potential_other_speakers_in_bundestag():
         }} }} AS %i
     WHERE {{
         INCLUDE %i
-        OPTIONAL {{ ?member {AFFILIATION} ?affiliation. }}
-        OPTIONAL {{ ?member {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
-        OPTIONAL {{ ?member {DATE_OF_BIRTH} ?dateOfBirth. }}
-        OPTIONAL {{ ?member {DATE_OF_DEATH} ?dateOfDeath. }}
-        OPTIONAL {{ ?member {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
+        OPTIONAL {{ ?person {AFFILIATION} ?affiliation. }}
+        OPTIONAL {{ ?person {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
+        OPTIONAL {{ ?person {DATE_OF_BIRTH} ?dateOfBirth. }}
+        OPTIONAL {{ ?person {DATE_OF_DEATH} ?dateOfDeath. }}
+        OPTIONAL {{ ?person {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
         OPTIONAL {{
-            ?member wdt:P18 ?image_.
+            ?person wdt:P18 ?image_.
             BIND(REPLACE(wikibase:decodeUri(STR(?image_)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") AS ?imageFileName_)
             BIND(REPLACE(?imageFileName_, " ", "_") AS ?imageFileNameSafe_)
             BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
             BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
         }}
-        OPTIONAL {{ ?member {MEMBER_OF_POLITICAL_PARTY_PROPERTY} ?partyStatement_. ?partyStatement_ {member_of_political_party_ps} ?party.  OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
+        OPTIONAL {{ ?person {MEMBER_OF_POLITICAL_PARTY_PROPERTY} ?partyStatement_. ?partyStatement_ {member_of_political_party_ps} ?party.  OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
         FILTER('1949-01-01'^^xsd:dateTime <= ?partyEndDate_ || !BOUND(?partyEndDate_)).
         OPTIONAL {{
-            ?member {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
+            ?person {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
             FILTER(lang(?genderLabel_) = "en"). 
         }}
         BIND(IF(BOUND(?genderLabel_ ), ?genderLabel_, "unknown") AS ?gender).
-        OPTIONAL {{ ?member {OFFICIAL_WEBSITE} ?websiteURI. }}
-        OPTIONAL {{ ?member {INSTAGRAM_USERNAME} ?instagram. }}
-        OPTIONAL {{ ?member {FACEBOOK_USERNAME} ?facebook. }}
-        OPTIONAL {{ ?member {TWITTER_USERNAME} ?twitter. }}
-        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". ?member rdfs:label ?memberLabel. ?member schema:description ?abstract. }}
+        OPTIONAL {{ ?person {OFFICIAL_WEBSITE} ?websiteURI. }}
+        OPTIONAL {{ ?person {INSTAGRAM_USERNAME} ?instagram. }}
+        OPTIONAL {{ ?person {FACEBOOK_USERNAME} ?facebook. }}
+        OPTIONAL {{ ?person {TWITTER_USERNAME} ?twitter. }}
+        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". ?person rdfs:label ?personLabel. ?person schema:description ?abstract. }}
         }}
         """.format(**WIKIDATA_MAPPINGS, 
             position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), 
@@ -129,10 +129,10 @@ def get_all_parties_of_germany():
 
 def get_all_members_of_parliament(parliament='DE'):    
     query_string = """
-    SELECT DISTINCT ?mdb ?mdbLabel ?altLabel ?faction ?factionStartTime ?factionEndTime ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
-        SELECT ?mdb ?humansWithPositionHeld WHERE {{
-            ?mdb {INSTANCE_OF} {HUMAN}.
-            ?mdb {POSITION_HELD} ?humansWithPositionHeld.
+    SELECT DISTINCT ?person ?personLabel ?altLabel ?faction ?factionStartTime ?factionEndTime ?affiliation ?abstract ?dateOfBirth ?dateOfDeath ?abgeordnetenwatchID ?thumbnailURI ?party ?gender ?websiteURI ?instagram ?facebook ?twitter WITH {{
+        SELECT ?person ?humansWithPositionHeld WHERE {{
+            ?person {INSTANCE_OF} {HUMAN}.
+            ?person {POSITION_HELD} ?humansWithPositionHeld.
             ?humansWithPositionHeld {position_held_ps} {member_of_parliament}.
         }} }} AS %i
     WHERE {{
@@ -141,32 +141,32 @@ def get_all_members_of_parliament(parliament='DE'):
             OPTIONAL {{ ?humansWithPositionHeld {START_TIME} ?factionStartTime.}} 
             OPTIONAL {{?humansWithPositionHeld {END_TIME} ?factionEndTime.}} 
         }}
-        OPTIONAL {{ ?mdb {AFFILIATION} ?affiliation. }}
-        OPTIONAL {{ ?mdb {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
-        OPTIONAL {{ ?mdb {DATE_OF_BIRTH} ?dateOfBirth. }}
-        OPTIONAL {{ ?mdb {DATE_OF_DEATH} ?dateOfDeath. }}
-        OPTIONAL {{ ?mdb {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
+        OPTIONAL {{ ?person {AFFILIATION} ?affiliation. }}
+        OPTIONAL {{ ?person {ALT_LABEL} ?altLabel. FILTER (lang(?altLabel) = "de") }}
+        OPTIONAL {{ ?person {DATE_OF_BIRTH} ?dateOfBirth. }}
+        OPTIONAL {{ ?person {DATE_OF_DEATH} ?dateOfDeath. }}
+        OPTIONAL {{ ?person {ABGEORDNETENWATCH_ID} ?abgeordnetenwatchID. }}
         OPTIONAL {{
-            ?mdb wdt:P18 ?image_.
+            ?person wdt:P18 ?image_.
             BIND(REPLACE(wikibase:decodeUri(STR(?image_)), "http://commons.wikimedia.org/wiki/Special:FilePath/", "") AS ?imageFileName_)
             BIND(REPLACE(?imageFileName_, " ", "_") AS ?imageFileNameSafe_)
             BIND(MD5(?imageFileNameSafe_) AS ?imageFileNameHash_)
             BIND(CONCAT("https://upload.wikimedia.org/wikipedia/commons/thumb/", SUBSTR(?imageFileNameHash_, 1 , 1 ), "/", SUBSTR(?imageFileNameHash_, 1 , 2 ), "/", ?imageFileNameSafe_, "/300px-", ?imageFileNameSafe_) AS ?thumbnailURI)
         }}
-        OPTIONAL {{ ?mdb {MEMBER_OF_POLITICAL_PARTY_PROPERTY} ?partyStatement_. ?partyStatement_ {member_of_political_party_ps} ?party.  OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
+        OPTIONAL {{ ?person {MEMBER_OF_POLITICAL_PARTY_PROPERTY} ?partyStatement_. ?partyStatement_ {member_of_political_party_ps} ?party.  OPTIONAL {{?party {DISSOLVED_DATE} ?partyEndDate_.}} }}
         FILTER('1949-01-01'^^xsd:dateTime <= ?partyEndDate_ || !BOUND(?partyEndDate_)).
         OPTIONAL {{
-            ?mdb {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
+            ?person {SEX_OR_GENDER} ?gender_. ?gender_ rdfs:label ?genderLabel_. 
             FILTER(lang(?genderLabel_) = "en"). 
         }}
         BIND(IF(BOUND(?genderLabel_ ), ?genderLabel_, "unknown") AS ?gender).
-        OPTIONAL {{ ?mdb {OFFICIAL_WEBSITE} ?websiteURI. }}
-        OPTIONAL {{ ?mdb {INSTAGRAM_USERNAME} ?instagram. }}
-        OPTIONAL {{ ?mdb {FACEBOOK_USERNAME} ?facebook. }}
-        OPTIONAL {{ ?mdb {TWITTER_USERNAME} ?twitter. }}
-        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". ?mdb rdfs:label ?mdbLabel. ?mdb schema:description ?abstract. }}
+        OPTIONAL {{ ?person {OFFICIAL_WEBSITE} ?websiteURI. }}
+        OPTIONAL {{ ?person {INSTAGRAM_USERNAME} ?instagram. }}
+        OPTIONAL {{ ?person {FACEBOOK_USERNAME} ?facebook. }}
+        OPTIONAL {{ ?person {TWITTER_USERNAME} ?twitter. }}
+        SERVICE wikibase:label {{ bd:serviceParam wikibase:language "de". ?person rdfs:label ?personLabel. ?person schema:description ?abstract. }}
         }}
-        """.format(**WIKIDATA_MAPPINGS, 
+        """.format(**WIKIDATA_MAPPINGS,
             position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), 
             parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['HAS_PARLIAMENTARY_GROUP']), 
             member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament], 
