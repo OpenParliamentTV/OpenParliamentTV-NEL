@@ -5,7 +5,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 import helpers
 
-INFILE = 'db_dump/data/factions/factions-rawqueryresults.json'
+INFILE_BUNDESTAG = 'db_dump/data/factions/factions-bundestag-rawqueryresults.json'
+INFILE_LANDTAGE = 'db_dump/data/factions/factions-landtage-rawqueryresults.json'
 OUTFILE = 'db_dump/data/factions/factions-formatted.json'
 
 
@@ -23,10 +24,14 @@ def reformat(obj):
     return new
 
 # map over the entries and reformat each of them (reformatting means changing property names or grouping properties)
-with open(INFILE) as infile:
-    data = json.load(infile)
-    entries = [reformat(entry) for entry in data['results']['bindings']]
-    helpers.check_for_dups(entries)
-    with open(OUTFILE, 'w', encoding='utf8') as outfile:
-        json.dump(entries, outfile, ensure_ascii=False)
+with open(INFILE_BUNDESTAG) as infile_bundestag:
+    with open(INFILE_LANDTAGE) as infile_landtage:
+        data_bundestag = json.load(infile_bundestag)
+        data_landtage = json.load(infile_landtage)
+        entries_bundestag = [reformat(entry) for entry in data_bundestag['results']['bindings']]
+        entries_landtage = [reformat(entry) for entry in data_landtage['results']['bindings']]
+        entries = entries_bundestag + entries_landtage
+        helpers.check_for_dups(entries)
+        with open(OUTFILE, 'w', encoding='utf8') as outfile:
+            json.dump(entries, outfile, ensure_ascii=False)
 
