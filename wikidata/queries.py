@@ -45,7 +45,7 @@ def get_all_potential_other_speakers_in_bundestag():
         }}
         """.format(**WIKIDATA_MAPPINGS, 
             position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), 
-            parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['PARLIAMENTARY_GROUP']), 
+            parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['HAS_PARLIAMENTARY_GROUP']), 
             member_of_political_party_ps = cps(WIKIDATA_MAPPINGS['MEMBER_OF_POLITICAL_PARTY_PROPERTY']))
     print(query_string)
     return query_string
@@ -168,7 +168,7 @@ def get_all_members_of_parliament(parliament='DE'):
         }}
         """.format(**WIKIDATA_MAPPINGS, 
             position_held_ps = cps(WIKIDATA_MAPPINGS['POSITION_HELD']), 
-            parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['PARLIAMENTARY_GROUP']), 
+            parliamentary_group_pq = cpq(WIKIDATA_MAPPINGS['HAS_PARLIAMENTARY_GROUP']), 
             member_of_parliament = WIKIDATA_MAPPINGS['MEMBER_OF_PARLIAMENT'][parliament], 
             member_of_political_party_ps = cps(WIKIDATA_MAPPINGS['MEMBER_OF_POLITICAL_PARTY_PROPERTY']))
     print(query_string)
