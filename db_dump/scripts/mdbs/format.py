@@ -14,8 +14,8 @@ OUTFILE_DE_BB = 'db_dump/data/mdbs/mdbs-formatted_DE-BB.json'
 
 def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}
-    id = flat.pop('mdb').split('/')[-1]
-    label = flat.pop('mdbLabel')
+    id = flat.pop('person').split('/')[-1]
+    label = flat.pop('personLabel')
     birthDate = None
     if 'dateOfBirth' in flat:
         birthDate = flat.pop('dateOfBirth', None).replace('T00:00:00Z', '')

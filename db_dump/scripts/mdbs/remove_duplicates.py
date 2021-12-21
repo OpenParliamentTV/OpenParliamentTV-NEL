@@ -2,12 +2,6 @@ import json
 import ast
 import datetime
 
-INFILE_DE = './db_dump/data/mdbs/mdbs-formatted_DE.json'
-OUTFILE_DE = './db_dump/data/mdbs/mdbs-deduped_DE.json'
-
-INFILE_DE_BB = './db_dump/data/mdbs/mdbs-formatted_DE-BB.json'
-OUTFILE_DE_BB = './db_dump/data/mdbs/mdbs-deduped_DE-BB.json'
-
 faction_keywords = ['factionID', 'factionStartTime', 'factionEndTime']
 keywords_to_remove_from_final_output = ['factionStartTime', 'factionEndTime']
 

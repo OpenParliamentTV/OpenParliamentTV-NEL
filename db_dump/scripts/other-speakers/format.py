@@ -10,8 +10,8 @@ OUTFILE = 'db_dump/data/other-speakers/other-speakers-formatted.json'
 
 def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}
-    id = flat.pop('member').split('/')[-1]
-    label = flat.pop('memberLabel')
+    id = flat.pop('person').split('/')[-1]
+    label = flat.pop('personLabel')
     birthDate = None
     if 'dateOfBirth' in flat:
         birthDate = flat.pop('dateOfBirth', None).replace('T00:00:00Z', '')

@@ -26,7 +26,7 @@ python db_dump/queries/factions.py
 
 ## Execute Scripts to generate the final dumps:
 
-Note: Order DOES matter here:
+Note: Order DOES matter here. (Why? Parties need to be queried first, because AbgeordnetenWatch party mapping relies on this. And the 'enhance' script in Persons relies on this party mapping.)
 
 ### 1. Parties:
 
@@ -36,25 +36,21 @@ Follow the README in db_dump/scripts/parties
 
 python abgeordnetenwatch/scripts/generate_mapping.py
 
-### 3. Mdbs
+### 3. Persons
 
-Follow the README in db_dump/scripts/mdbs
+Follow the README in db_dump/scripts/persons
 
 ### 4. Factions
 
 Follow the README in db_dump/scripts/factions
 
-### 5. Other speakers
-
-Follow the README in db_dump/scripts/other-speakers
-
 #### Final json dumps will be saved to:
 
-db_dump/data/mdbs/mdbs-final.json
+db_dump/data/persons/final.json
 db_dump/data/factions/factions-final.json
 db_dump/data/parties/parties-final.json
 
 ### Notes about our approach:
 
 - Our main source of data is Wikidata
-- Sometimes Wikidata has weird information (e.g. parties of a mdb are not sorted or not complete. Factions are also problematic.), in this case we use Abgeordnetenwatch as a datasource, but map the IDs back to Wikidata
+- Sometimes Wikidata has insufficient information (e.g. parties and factions of a parliamentary member are not sorted or not complete.), in this case we use Abgeordnetenwatch as a datasource, but map the IDs back to Wikidata
