@@ -7,25 +7,11 @@ import json
 import wikidata.client as wikidata_client
 from wikidata.queries import get_all_members_of_parliament
 
-# German Bundestag
+PARLIAMENTS = ["DE", "DE-BB"] # German Bundestag, Landtag Brandenburg
 
-OUTFILE_DE = 'db_dump/data/mdbs/mdbs-rawqueryresults_DE.json'
-
-query_DE = get_all_members_of_parliament(parliament="DE")
-
-results_DE = wikidata_client.get(query_DE)
-#print(results_DE)
-
-with open(OUTFILE_DE, 'w', encoding='utf8') as outfile_DE:
-    json.dump(results_DE, outfile_DE, ensure_ascii=False)
-
-# Landtag Brandenburg
-
-OUTFILE_DE_BB = 'db_dump/data/mdbs/mdbs-rawqueryresults_DE-BB.json'
-
-query_DE_BB = get_all_members_of_parliament(parliament="DE-BB")
-
-results_DE_BB = wikidata_client.get(query_DE_BB)
-
-with open(OUTFILE_DE_BB, 'w', encoding='utf8') as outfile_DE_BB:
-    json.dump(results_DE_BB, outfile_DE_BB, ensure_ascii=False)
+for PARLIAMENT in PARLIAMENTS:
+    OUTFILE = 'db_dump/data/mdbs/mdbs-rawqueryresults_' + PARLIAMENT + '.json'
+    query = get_all_members_of_parliament(parliament=PARLIAMENT)
+    results = wikidata_client.get(query)
+    with open(OUTFILE, 'w', encoding='utf8') as outfile:
+        json.dump(results, outfile, ensure_ascii=False)
