@@ -5,9 +5,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 import helpers
 
-INFILE_BUNDESTAG = 'db_dump/data/factions/factions-bundestag-rawqueryresults.json'
-INFILE_LANDTAGE = 'db_dump/data/factions/factions-landtage-rawqueryresults.json'
-OUTFILE = 'db_dump/data/factions/factions-formatted.json'
+INFILE_BUNDESTAG = 'db_dump/data/factions/rawqueryresults-bundestag.json'
+INFILE_LANDTAGE = 'db_dump/data/factions/rawqueryresults-landtage.json'
+OUTFILE = 'db_dump/data/factions/formatted.json'
 
 
 def reformat(obj):

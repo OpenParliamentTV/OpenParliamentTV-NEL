@@ -7,8 +7,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))))
 from wikidata.manual_data import FACTION_SHORT_NAMES
 
-INFILE = 'db_dump/data/factions/factions-formatted.json'
-OUTFILE = 'db_dump/data/factions/factions-final.json'
+INFILE = 'db_dump/data/factions/formatted.json'
+OUTFILE = 'db_dump/data/factions/final.json'
 
 def add_shortname(faction):
     if faction['id'] in FACTION_SHORT_NAMES:

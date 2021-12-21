@@ -3,7 +3,7 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 rootdir = os.path.dirname(os.path.dirname(currentdir))
 sys.path.append(rootdir)
 
-OUTFILE = 'db_dump/data/parties/parties-rawqueryresults.json'
+OUTFILE = 'db_dump/data/parties/rawqueryresults.json'
 
 import json
 import wikidata.client as wikidata_client

@@ -3,8 +3,8 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 rootdir = os.path.dirname(os.path.dirname(currentdir))
 sys.path.append(rootdir)
 
-OUTFILE_BUNDESTAG = 'db_dump/data/factions/factions-bundestag-rawqueryresults.json'
-OUTFILE_LANDTAGE = 'db_dump/data/factions/factions-landtage-rawqueryresults.json'
+OUTFILE_BUNDESTAG = 'db_dump/data/factions/rawqueryresults-bundestag.json'
+OUTFILE_LANDTAGE = 'db_dump/data/factions/rawqueryresults-landtage.json'
 
 import json
 import wikidata.client as wikidata_client
