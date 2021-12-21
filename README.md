@@ -12,9 +12,9 @@ e.g. via the command: pipenv shell
 
 (Order doesn't matter here)
 
-### MdBs:
+### Persons:
 
-python db_dump/queries/mdbs.py
+python db_dump/queries/persons.py
 
 ### Parties:
 
@@ -23,10 +23,6 @@ python db_dump/queries/parties.py
 ### Factions:
 
 python db_dump/queries/factions.py
-
-### Other speakers:
-
-python db_dump/queries/other-speakers.py
 
 ## Execute Scripts to generate the final dumps:
 

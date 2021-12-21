@@ -5,7 +5,7 @@ sys.path.append(rootdir)
 
 import json
 import wikidata.client as wikidata_client
-from wikidata.queries import get_all_members_of_parliament
+from wikidata.queries import get_all_members_of_parliament, get_all_potential_other_speakers_in_bundestag
 
 PARLIAMENTS = ["DE", "DE-BB"] # German Bundestag, Landtag Brandenburg
 
@@ -15,3 +15,10 @@ for PARLIAMENT in PARLIAMENTS:
     results = wikidata_client.get(query)
     with open(OUTFILE, 'w', encoding='utf8') as outfile:
         json.dump(results, outfile, ensure_ascii=False)
+
+#Additional: Other speakers for German Bundestag
+OUTFILE = 'db_dump/data/other-speakers/other-speakers-rawqueryresults.json'
+query = get_all_potential_other_speakers_in_bundestag()
+results = wikidata_client.get(query)
+with open(OUTFILE, 'w', encoding='utf8') as outfile:
+    json.dump(results, outfile, ensure_ascii=False)
