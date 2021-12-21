@@ -26,7 +26,8 @@ python db_dump/queries/factions.py
 
 ## Execute Scripts to generate the final dumps:
 
-Note: Order DOES matter here. (Why? Parties need to be queried first, because AbgeordnetenWatch party mapping relies on this. And the 'enhance' script in Persons relies on this party mapping.)
+Note: Order DOES matter here.
+(Why? Parties need to be queried first, because AbgeordnetenWatch party mapping relies on this. And the 'enhance' script in Persons relies on this AbgeordnetenWatch party mapping.)
 
 ### 1. Parties:
 
