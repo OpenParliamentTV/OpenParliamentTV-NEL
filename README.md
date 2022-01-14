@@ -14,15 +14,15 @@ e.g. via the command: pipenv shell
 
 ### Persons:
 
-python db_dump/queries/persons.py
+python src/optv_nel/queries/persons.py
 
 ### Parties:
 
-python db_dump/queries/parties.py
+python src/optv_nel/queries/parties.py
 
 ### Factions:
 
-python db_dump/queries/factions.py
+python src/optv_nel/queries/factions.py
 
 ## Execute Scripts to generate the final dumps:
 

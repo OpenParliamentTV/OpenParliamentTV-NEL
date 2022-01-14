@@ -1,11 +1,6 @@
-import os, sys
-currentdir = os.path.dirname(os.path.realpath(__file__))
-rootdir = os.path.dirname(os.path.dirname(currentdir))
-sys.path.append(rootdir)
-
 import json
-import wikidata.client as wikidata_client
-from wikidata.queries import get_all_members_of_parliament, get_all_potential_other_speakers_in_bundestag
+import optv_nel.wikidata.client as wikidata_client
+from optv_nel.wikidata.queries import get_all_members_of_parliament, get_all_potential_other_speakers_in_bundestag
 
 PARLIAMENTS = ["DE", "DE-BB"] # German Bundestag, Landtag Brandenburg
 

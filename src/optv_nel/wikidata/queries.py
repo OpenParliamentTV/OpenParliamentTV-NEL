@@ -1,6 +1,6 @@
-from wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
-from wikidata.helpers import convert_to_property_statement as cps
-from wikidata.helpers import convert_to_qualifier_statement as cpq
+from optv_nel.wikidata.mappings import MAPPINGS as WIKIDATA_MAPPINGS
+from optv_nel.wikidata.helpers import convert_to_property_statement as cps
+from optv_nel.wikidata.helpers import convert_to_qualifier_statement as cpq
 
 def get_all_potential_other_speakers_in_bundestag():    
     query_string = """

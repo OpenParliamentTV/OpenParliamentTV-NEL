@@ -1,15 +1,10 @@
-import os, sys
-currentdir = os.path.dirname(os.path.realpath(__file__))
-rootdir = os.path.dirname(os.path.dirname(currentdir))
-sys.path.append(rootdir)
-
 OUTFILE_BUNDESTAG = 'db_dump/data/factions/rawqueryresults-bundestag.json'
 OUTFILE_LANDTAGE = 'db_dump/data/factions/rawqueryresults-landtage.json'
 
 import json
-import wikidata.client as wikidata_client
-from wikidata.queries import get_all_bundestag_factions_of_germany
-from wikidata.queries import get_all_landtag_factions_of_germany
+import optv_nel.wikidata.client as wikidata_client
+from optv_nel.wikidata.queries import get_all_bundestag_factions_of_germany
+from optv_nel.wikidata.queries import get_all_landtag_factions_of_germany
 
 query_bundestag = get_all_bundestag_factions_of_germany()
 query_landtage = get_all_landtag_factions_of_germany()
