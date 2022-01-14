@@ -1,4 +1,4 @@
-OUTFILE = 'db_dump/data/parties/rawqueryresults.json'
+OUTFILE = 'data/01_raw/parties/rawqueryresults.json'
 
 import json
 import optv_nel.wikidata.client as wikidata_client
