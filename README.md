@@ -8,23 +8,13 @@ This README is not fully up to date and the repository is very much work in prog
 
 e.g. via the command: pipenv shell
 
-## Execute Wikidata queries:
+## Execute script
 
-(Order doesn't matter here)
+python src/optv_nel/d01_query_persons.py
+python src/optv_nel/d01_query_parties.py
+python src/optv_nel/d01_query_factions.py
 
-### Persons:
-
-python src/optv_nel/d01_data_persons_query.py
-
-### Parties:
-
-python src/optv_nel/d01_data_parties_query.py
-
-### Factions:
-
-python src/optv_nel/d01_data_factions_query.py
-
-## Execute Scripts to generate the final dumps:
+## Then...
 
 Note: Order DOES matter here.
 (Why? Parties need to be queried first, because AbgeordnetenWatch party mapping relies on this. And the 'enhance' script in Persons relies on this AbgeordnetenWatch party mapping.)
