@@ -1,5 +1,5 @@
-OUTFILE_BUNDESTAG = 'data/01_raw/factions/rawqueryresults-bundestag.json'
-OUTFILE_LANDTAGE = 'data/01_raw/factions/rawqueryresults-landtage.json'
+OUTFILE_BUNDESTAG = 'data/01_raw/factions/bundestag.json'
+OUTFILE_LANDTAGE = 'data/01_raw/factions/landtage.json'
 
 import json
 import optv_nel.wikidata.client as wikidata_client

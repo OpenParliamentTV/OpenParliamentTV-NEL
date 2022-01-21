@@ -4,9 +4,9 @@ import ast
 import datetime
 
 #Deduce the PARLIAMENTS from the filenames in the /persons folder
-JSON_DIR = 'db_dump/data/persons'
-ALL_FILES = [f for f in os.listdir(JSON_DIR) if os.path.isfile(os.path.join(JSON_DIR, f))]
-INPUT_FILES = [f for f in ALL_FILES if f.startswith('formatted')]
+INPUT_DIR = 'data/02_formatted/persons/'
+OUTPUT_DIR = 'data/03_deduped/persons/'
+INPUT_FILES = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
 PARLIAMENTS = [f.split('.json')[0].split('formatted_')[-1] for f in INPUT_FILES]
 print(PARLIAMENTS)
 
@@ -114,6 +114,6 @@ def process_file(infile_path, outfile_path):
             json.dump(cleaned, outfile, ensure_ascii=False)
 
 for PARLIAMENT in PARLIAMENTS:
-    infile = JSON_DIR+'/formatted_'+PARLIAMENT+'.json'
-    outfile = JSON_DIR+'/deduped_'+PARLIAMENT+'.json'
+    infile = INPUT_DIR + PARLIAMENT+'.json'
+    outfile = OUTPUT_DIR + PARLIAMENT+'.json'
     process_file(infile, outfile)

@@ -10,15 +10,11 @@ from abgeordnetenwatch.mappings import convert_to_wikidata_party_id
 from wikimedia_commons.helpers import extract_image_license
 
 #Deduce the PARLIAMENTS from the filenames in the /persons folder
-JSON_DIR = 'db_dump/data/persons'
-ALL_FILES = [f for f in os.listdir(JSON_DIR) if os.path.isfile(os.path.join(JSON_DIR, f))]
-INPUT_FILES = [f for f in ALL_FILES if f.startswith('deduped')]
-PARLIAMENTS = [f.split('.json')[0].split('deduped_')[-1] for f in INPUT_FILES]
+INPUT_DIR = 'data/03_deduped/persons/'
+INPUT_FILES = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
+OUTPUT_DIR = 'data/05_enhanced/persons/'
+PARLIAMENTS = [f.split('.json')[0] for f in INPUT_FILES]
 print(PARLIAMENTS)
-
-INFILE_DE = './db_dump/data/mdbs/mdbs-deduped_DE.json'
-OUTFILE_DE = './db_dump/data/mdbs/mdbs-final_DE.json'
-
 
 def add_faction_from_abgeordnetenwatch(abgeordnetenwatch_id, entry, parliament):
     faction = abgeordnetenwatch_client.get_faction(abgeordnetenwatch_id, parliament)
@@ -65,7 +61,7 @@ def process_file(infile_path, outfile_path, parliament):
             json.dump(result, outfile, ensure_ascii=False)
 
 for PARLIAMENT in PARLIAMENTS:
-    infile = JSON_DIR+'/deduped_'+PARLIAMENT+'.json'
-    outfile = JSON_DIR+'/final_'+PARLIAMENT+'.json'
+    infile = INPUT_DIR + PARLIAMENT+ '.json'
+    outfile = OUTPUT_DIR + PARLIAMENT+ '.json'
     print(PARLIAMENT)
     process_file(infile, outfile, PARLIAMENT)

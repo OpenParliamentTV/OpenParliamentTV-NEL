@@ -5,9 +5,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 import helpers
 
-INFILE = 'db_dump/data/parties/rawqueryresults.json'
-OUTFILE = 'db_dump/data/parties/formatted.json'
-
+INFILE = 'data/01_raw/parties/parties.json'
+OUTFILE = 'data/02_formatted/parties.json'
 
 def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}

@@ -1,5 +1,5 @@
 import json
-PARTY_MAPPING_FILE = 'abgeordnetenwatch/party-mapping.json'
+PARTY_MAPPING_FILE = 'data/04_mappings/parties/abgeordnetenwatch_to_wikidata.json'
 
 #TODO: This could be improved by strictly checking IDs instead of fuzzy stringmatching..
 def convert_to_wikidata_faction_id(aw_faction_object, parliament):

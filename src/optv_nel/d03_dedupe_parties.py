@@ -1,8 +1,8 @@
 import json
 import ast
 
-INFILE = './db_dump/data/parties/formatted.json'
-OUTFILE = './db_dump/data/parties/final.json'
+INFILE = './data/02_formatted/parties.json'
+OUTFILE = './data/03_deduped/parties.json'
 
 def remove_dups_from_list(thelist):
     print("List", thelist)
