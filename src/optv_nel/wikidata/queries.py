@@ -11,7 +11,11 @@ def get_all_potential_other_speakers_in_bundestag():
             {{ ?humansWithPositionHeld {position_held_ps} {MEMBER_OF_BUNDESRAT}.}} 
             UNION 
             {{ ?humansWithPositionHeld {position_held_ps} {DEPUTY_MEMBER_OF_BUNDESRAT}.}}
-            UNION 
+            UNION
+            {{ ?humansWithPositionHeld {position_held_ps} {STATE_SECRETARY}.}}
+            UNION
+            {{ ?humansWithPositionHeld {position_held_ps} {BUNDES_MINISTER}.}}
+            UNION
             {{ ?humansWithPositionHeld {position_held_ps} ?minister. ?minister {SUBCLASS_OF} {BUNDES_MINISTER}. }}  
             UNION 
             {{ ?humansWithPositionHeld {position_held_ps} ?beauftragter. ?beauftragter {SUBCLASS_OF} {BUNDES_BEAUFTRAGTER}. }}  
@@ -81,7 +85,9 @@ def get_all_bundestag_factions_of_germany():
     query_string = """
     SELECT DISTINCT ?faction ?factionLabel ?parliamentaryCode ?abstract ?instagram ?facebook ?twitter ?thumbnailURI ?websiteURI  WHERE {{
         BIND('DE' AS ?parliamentaryCode).
-        ?faction {INSTANCE_OF} {BUNDESTAG_PARLIAMENTARY_GROUP}.
+        {{ ?faction {INSTANCE_OF} {BUNDESTAG_PARLIAMENTARY_GROUP}. }}
+        UNION
+        {{ ?faction wdt:P31 wd:Q11744698. }}
         OPTIONAL {{?faction schema:description ?abstract. FILTER(lang(?abstract) = "de").}}
         OPTIONAL {{ ?faction {INSTAGRAM_USERNAME} ?instagram. }}
         OPTIONAL {{ ?faction {FACEBOOK_USERNAME} ?facebook. }}
@@ -103,7 +109,11 @@ def get_all_bundestag_factions_of_germany():
 def get_all_parties_of_germany():
     query_string = """
     SELECT DISTINCT ?ppg ?ppgLabel ?labelAlternative ?abstract ?thumbnailURI ?websiteURI ?instagram ?facebook ?twitter WHERE {{
-        ?ppg {INSTANCE_OF} {POLITICAL_PARTY_IN_GERMANY}.
+        {{ ?ppg {INSTANCE_OF} {POLITICAL_PARTY_IN_GERMANY}. }}
+        UNION
+        {{ ?ppg wdt:P31 wd:Q21040876. }}
+        UNION
+        {{ ?ppg wdt:P31 wd:Q11744698. }}
         OPTIONAL {{?ppg {SHORT_NAME} ?labelAlternative. FILTER(lang(?labelAlternative) = "de").}}
         OPTIONAL {{?ppg schema:description ?abstract. FILTER(lang(?abstract) = "de").}}
         OPTIONAL {{ ?ppg {DISSOLVED_DATE} ?endDate. }}
