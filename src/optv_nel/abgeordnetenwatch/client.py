@@ -3,7 +3,6 @@ import requests
 ENDPOINT_URL = "https://www.abgeordnetenwatch.de/api/v2/"
 
 def get_faction(abgeordnetenwatchID, parliament):
-    
     if parliament == 'DE':
         parliament_name = "Bundestag"
     elif parliament == 'DE-BB':
@@ -27,3 +26,9 @@ def get_party(abgeordnetenwatchID):
     politician_data = response.json()['data']
     party = politician_data.get('party')
     return party
+
+def get_parties():
+    response = requests.get(ENDPOINT_URL + "parties?range_end=1000")
+    print(response)
+    parties = response.json()['data']
+    return parties

@@ -14,7 +14,7 @@ OUTFILE = "abgeordnetenwatch_to_wikidata.json"
 with open(PARTY_DUMP_WIKIDATA) as parties_wikidata_file:
     with open(PARTY_DUMP_ABGEORDNETENWATCH) as parties_abgeordnetenwatch_file:
         parties_wikidata = json.load(parties_wikidata_file)
-        parties_abgeordnetenwatch = json.load(parties_abgeordnetenwatch_file).get('data')
+        parties_abgeordnetenwatch = json.load(parties_abgeordnetenwatch_file)
         mapping = {}
         for party_wd in parties_wikidata:
             party_label_wd = party_wd.get('label', '')
