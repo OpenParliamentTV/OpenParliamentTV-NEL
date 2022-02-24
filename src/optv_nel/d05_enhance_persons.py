@@ -1,19 +1,17 @@
+from pathlib import Path
 import json
 import os
-import sys
-
-#add project root to path so I can import a module from the wikidata folder
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))))
-import abgeordnetenwatch.client as abgeordnetenwatch_client
-from abgeordnetenwatch.mappings import convert_to_wikidata_faction_id
-from abgeordnetenwatch.mappings import convert_to_wikidata_party_id
-from wikimedia_commons.helpers import extract_image_license
+import optv_nel.abgeordnetenwatch.client as abgeordnetenwatch_client
+from optv_nel.abgeordnetenwatch.mappings import convert_to_wikidata_faction_id
+from optv_nel.abgeordnetenwatch.mappings import convert_to_wikidata_party_id
+from optv_nel.wikimedia_commons.helpers import extract_image_license
 
 #Deduce the PARLIAMENTS from the filenames in the /persons folder
-INPUT_DIR = 'data/03_deduped/persons/'
+INPUT_DIR = "data/03_deduped/persons"
 INPUT_FILES = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
-OUTPUT_DIR = 'data/05_enhanced/persons/'
-PARLIAMENTS = [f.split('.json')[0] for f in INPUT_FILES]
+OUTPUT_DIR = Path("data/05_enhanced/persons")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+PARLIAMENTS = [f.split(".json")[0] for f in INPUT_FILES]
 print(PARLIAMENTS)
 
 def add_faction_from_abgeordnetenwatch(abgeordnetenwatch_id, entry, parliament):
@@ -47,6 +45,7 @@ def process_file(infile_path, outfile_path, parliament):
                 if abgeordnetenwatch_id is not None:
                     add_faction_from_abgeordnetenwatch(abgeordnetenwatch_id, entry, parliament)
                     add_party_from_abgeordnetenwatch(abgeordnetenwatch_id, entry)
+                    pass
 
             #Add thumbnailCreator and thumbnailLicense from Wikimedia Commons
             thumbnail_uri = entry.get("thumbnailURI")
@@ -54,14 +53,13 @@ def process_file(infile_path, outfile_path, parliament):
                 license_info = extract_image_license(thumbnail_uri)
                 entry['thumbnailCreator'] = license_info['creator']
                 entry['thumbnailLicense'] = license_info['license']
-
             result.append(entry)
             counter = counter + 1
         with open(outfile_path, 'w', encoding='utf8') as outfile:
             json.dump(result, outfile, ensure_ascii=False)
 
 for PARLIAMENT in PARLIAMENTS:
-    infile = INPUT_DIR + PARLIAMENT+ '.json'
-    outfile = OUTPUT_DIR + PARLIAMENT+ '.json'
+    infile = Path(INPUT_DIR) / Path(PARLIAMENT+ ".json")
+    outfile = OUTPUT_DIR / Path(PARLIAMENT+ ".json")
     print(PARLIAMENT)
     process_file(infile, outfile, PARLIAMENT)

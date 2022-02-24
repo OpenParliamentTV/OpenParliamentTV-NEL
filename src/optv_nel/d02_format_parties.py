@@ -1,12 +1,11 @@
+from pathlib import Path
 import json
-import os
-import sys
+import optv_nel.helpers as helpers
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-import helpers
-
-INFILE = 'data/01_raw/parties/parties.json'
-OUTFILE = 'data/02_formatted/parties.json'
+INFILE = "data/01_raw/parties/parties.json"
+OUTPATH = Path("data/02_formatted/parties")
+OUTPATH.mkdir(parents=True, exist_ok=True)
+OUTFILE = OUTPATH / Path("parties.json")
 
 def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}

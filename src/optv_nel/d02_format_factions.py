@@ -1,14 +1,12 @@
+from pathlib import Path
 import json
-import os
-import sys
+import optv_nel.helpers as helpers
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-import helpers
-
-INFILE_BUNDESTAG = 'data/01_raw/factions/bundestag.json'
-INFILE_LANDTAGE = 'data/01_raw/factions/landtage.json'
-OUTFILE = 'data/02_formatted/factions/formatted.json'
-
+INFILE_BUNDESTAG = "data/01_raw/factions/bundestag.json"
+INFILE_LANDTAGE = "data/01_raw/factions/landtage.json"
+OUTPATH = Path("data/02_formatted/factions")
+OUTPATH.mkdir(parents=True, exist_ok=True)
+OUTFILE = OUTPATH / Path("factions.json")
 
 def reformat(obj):
     flat = {key : value['value'] for (key, value) in obj.items()}
@@ -34,4 +32,3 @@ with open(INFILE_BUNDESTAG) as infile_bundestag:
         helpers.check_for_dups(entries)
         with open(OUTFILE, 'w', encoding='utf8') as outfile:
             json.dump(entries, outfile, ensure_ascii=False)
-

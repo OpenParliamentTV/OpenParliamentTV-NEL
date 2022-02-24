@@ -1,8 +1,11 @@
+from pathlib import Path
 import json
 import ast
 
-INFILE = './data/02_formatted/parties.json'
-OUTFILE = './data/03_deduped/parties.json'
+INFILE = "data/02_formatted/parties/parties.json"
+OUTPATH = Path("data/03_deduped/parties")
+OUTPATH.mkdir(parents=True, exist_ok=True)
+OUTFILE = "parties.json"
 
 def remove_dups_from_list(thelist):
     print("List", thelist)
@@ -68,7 +71,7 @@ with open(INFILE) as infile:
         'websiteURI': '',
         'labelAlternative': 'parteilos'
     })
-    with open(OUTFILE, 'w', encoding='utf8') as outfile:
+    with open(OUTPATH / OUTFILE, 'w', encoding='utf8') as outfile:
         json.dump(cleaned, outfile, ensure_ascii=False)
 
 

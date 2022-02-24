@@ -1,11 +1,13 @@
+from pathlib import Path
 import os
 import json
 import ast
 import datetime
 
 #Deduce the PARLIAMENTS from the filenames in the /persons folder
-INPUT_DIR = 'data/02_formatted/persons/'
-OUTPUT_DIR = 'data/03_deduped/persons/'
+INPUT_DIR = "data/02_formatted/persons"
+OUTPUT_DIR = Path("data/03_deduped/persons")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 INPUT_FILES = [f for f in os.listdir(INPUT_DIR) if os.path.isfile(os.path.join(INPUT_DIR, f))]
 PARLIAMENTS = [f.split('.json')[0].split('formatted_')[-1] for f in INPUT_FILES]
 print(PARLIAMENTS)
@@ -114,6 +116,6 @@ def process_file(infile_path, outfile_path):
             json.dump(cleaned, outfile, ensure_ascii=False)
 
 for PARLIAMENT in PARLIAMENTS:
-    infile = INPUT_DIR + PARLIAMENT+'.json'
-    outfile = OUTPUT_DIR + PARLIAMENT+'.json'
+    infile = Path(INPUT_DIR) / Path(PARLIAMENT+ ".json")
+    outfile = OUTPUT_DIR / Path(PARLIAMENT+".json")
     process_file(infile, outfile)
