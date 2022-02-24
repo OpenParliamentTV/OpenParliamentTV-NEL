@@ -87,7 +87,7 @@ def get_all_bundestag_factions_of_germany():
         BIND('DE' AS ?parliamentaryCode).
         {{ ?faction {INSTANCE_OF} {BUNDESTAG_PARLIAMENTARY_GROUP}. }}
         UNION
-        {{ ?faction wdt:P31 wd:Q11744698. }}
+        {{ ?faction {INSTANCE_OF} {PARLIAMENTARY_GROUPING}. }}
         OPTIONAL {{?faction schema:description ?abstract. FILTER(lang(?abstract) = "de").}}
         OPTIONAL {{ ?faction {INSTAGRAM_USERNAME} ?instagram. }}
         OPTIONAL {{ ?faction {FACEBOOK_USERNAME} ?facebook. }}
@@ -111,9 +111,9 @@ def get_all_parties_of_germany():
     SELECT DISTINCT ?ppg ?ppgLabel ?labelAlternative ?abstract ?thumbnailURI ?websiteURI ?instagram ?facebook ?twitter WHERE {{
         {{ ?ppg {INSTANCE_OF} {POLITICAL_PARTY_IN_GERMANY}. }}
         UNION
-        {{ ?ppg wdt:P31 wd:Q21040876. }}
+        {{ ?ppg {INSTANCE_OF} {LANDESPARTEI}. }}
         UNION
-        {{ ?ppg wdt:P31 wd:Q11744698. }}
+        {{ ?ppg {INSTANCE_OF} {PARLIAMENTARY_GROUPING}. }}
         OPTIONAL {{?ppg {SHORT_NAME} ?labelAlternative. FILTER(lang(?labelAlternative) = "de").}}
         OPTIONAL {{?ppg schema:description ?abstract. FILTER(lang(?abstract) = "de").}}
         OPTIONAL {{ ?ppg {DISSOLVED_DATE} ?endDate. }}
