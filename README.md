@@ -4,13 +4,17 @@ This README is not fully up to date and the repository is very much work in prog
 
 ---
 
-## Activate the virtual environment of your choice
+## Install dependencies
 
-e.g. via the command: pipenv shell
+pipenv install
+
+## Activate the virtual environment
+
+pipenv shell
 
 ## Execute scripts
 
-Excecute scripts in the order of the prefixed number:
+Excecute scripts (`python src/optv_nel/{scriptname}`) in the order of the prefixed number:
 
 ```
 d01_...

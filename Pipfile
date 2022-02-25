@@ -4,6 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+optv-nel = {editable = true, path = "./src"}
+requests = "*"
+sparqlwrapper = "*"
 
 [dev-packages]
 
